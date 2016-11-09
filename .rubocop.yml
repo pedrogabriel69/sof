@@ -1,0 +1,39 @@
+AllCops:
+  Include:
+    - 'app/**/*.rb'
+    - 'config/**/*.rb'
+    - 'lib/**/*.rb'
+    - 'lib/**/*/rake'
+  Exclude:
+    - 'vendor/**/*'
+    - 'db/**/*'
+    - 'bin/**/*'
+  DisplayCopNames: true
+Rails:
+  Enabled: true
+Style/DoubleNegation:
+  Enabled: false
+Rails/HasAndBelongsToMany:
+  Enabled: false
+Rails/Validation:
+  Enabled: false
+Rails/FindBy:
+  Enabled: false
+Metrics/LineLength:
+  Max: 115
+Metrics/ClassLength:
+  Max: 115
+Metrics/AbcSize:
+  Max: 30
+Metrics/CyclomaticComplexity:
+  Max: 15
+Metrics/MethodLength:
+  Max: 25
+Style/AccessorMethodName:
+  Enabled: false
+Style/GuardClause:
+  Enabled: false
+Style/AsciiComments:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
