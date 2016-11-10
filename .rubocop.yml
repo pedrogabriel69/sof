@@ -20,9 +20,9 @@ Rails/Validation:
 Rails/FindBy:
   Enabled: false
 Metrics/LineLength:
-  Max: 115
+  Max: 155
 Metrics/ClassLength:
-  Max: 115
+  Max: 155
 Metrics/AbcSize:
   Max: 30
 Metrics/CyclomaticComplexity:
@@ -36,4 +36,6 @@ Style/GuardClause:
 Style/AsciiComments:
   Enabled: false
 Style/FrozenStringLiteralComment:
+  Enabled: false
+Documentation:
   Enabled: false
