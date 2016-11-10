@@ -44,22 +44,22 @@ RSpec.describe AnswersController, type: :controller do
   describe 'POST #create' do
     context 'correct work' do
       it 'create object' do
-        expect { post :create, question_id: question, user_id: user, answer: attributes_for(:answer) }.to change(Answer, :count).by(1)
+        expect { post :create, params: { question_id: question, user_id: user, answer: attributes_for(:answer) } }.to change(Answer, :count).by(1)
       end
 
       it 'render show view' do
-        post :create, question_id: question, user_id: user, answer: attributes_for(:answer)
+        post :create, params: { question_id: question, user_id: user, answer: attributes_for(:answer) }
         expect(response).to redirect_to questions_path
       end
     end
 
     context 'not correct work' do
       it 'create object' do
-        expect { post :create, question_id: question, user_id: user, answer: attributes_for(:invalid_answer) }.to_not change(Answer, :count)
+        expect { post :create, params: { question_id: question, user_id: user, answer: attributes_for(:invalid_answer) } }.to_not change(Answer, :count)
       end
 
       it 're-render new view' do
-        post :create, question_id: question, user_id: user, answer: attributes_for(:invalid_answer)
+        post :create, params: { question_id: question, user_id: user, answer: attributes_for(:invalid_answer) }
         expect(response).to render_template :new
       end
     end
