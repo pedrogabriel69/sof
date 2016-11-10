@@ -55,7 +55,7 @@ RSpec.describe AnswersController, type: :controller do
 
     context 'not correct work' do
       it 'create object' do
-        expect { post :create, params: { question_id: question, user_id: user, answer: attributes_for(:invalid_answer) } }.to_not change(Answer, :count)
+        expect { post :create, params: { question_id: question, user_id: user, answer: attributes_for(:invalid_answer) } }.to_not change(question.answers, :count)
       end
 
       it 're-render new view' do
