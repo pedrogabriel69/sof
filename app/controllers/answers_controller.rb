@@ -19,18 +19,19 @@ class AnswersController < ApplicationController
 
   def create
     @answer = @question.answers.new(answer_params)
-      if @answer.save
-        redirect_to @question
-      else
-        render :new
-      end
+
+    if @answer.save
+      redirect_to questions_path
+    else
+      render :new
+    end
   end
 
   def update
     if @answer.update(answer_params)
-      redirect_to @answer
-      else
-        render :edit
+      redirect_to questions_path
+    else
+      render :edit
     end
   end
 
@@ -50,6 +51,6 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:body)
+    params.require(:answer).permit(:body).merge(user: User.last)
   end
 end
