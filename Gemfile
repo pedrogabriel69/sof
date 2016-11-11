@@ -12,7 +12,9 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'haml-rails'
 gem 'rubocop', require: false
+gem 'bootstrap-sass'
 gem 'devise'
+gem 'devise-bootstrap-views'
 
 group :development, :test do
   gem 'byebug', platform: :mri
