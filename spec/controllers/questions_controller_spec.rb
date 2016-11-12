@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
-  let(:user) { create(:user) }
-  let(:question) { create(:question, user: user) }
-  let(:answer) { create(:answer, user: user, question: question) }
+  sign_in_user
+  let(:question) { create(:question, user: @user) }
+  let(:answer) { create(:answer, user: @user, question: question) }
 
   describe 'GET #index' do
-    let(:q1) { create(:question, user: user) }
-    let(:q2) { create(:question, user: user) }
+    let(:q1) { create(:question, user: @user) }
+    let(:q2) { create(:question, user: @user) }
 
     before { get :index }
 
@@ -59,22 +59,22 @@ RSpec.describe QuestionsController, type: :controller do
   describe 'POST #create' do
     context 'correct work' do
       it 'create object' do
-        expect { post :create, user_id: user, params: { question: attributes_for(:question) } }.to change(Question, :count).by(1)
+        expect { post :create, user_id: @user, params: { question: attributes_for(:question) } }.to change(Question, :count).by(1)
       end
 
       it 'render show view' do
-        post :create, user_id: user, params: { question: attributes_for(:question) }
+        post :create, user_id: @user, params: { question: attributes_for(:question) }
         expect(response).to redirect_to question_path(assigns(:question))
       end
     end
 
     context 'not correct work' do
       it 'create object' do
-        expect { post :create, user_id: user, params: { question: attributes_for(:invalid_question) } }.to_not change(Question, :count)
+        expect { post :create, user_id: @user, params: { question: attributes_for(:invalid_question) } }.to_not change(Question, :count)
       end
 
       it 're-render new view' do
-        post :create, user_id: user, params: { question: attributes_for(:invalid_question) }
+        post :create, user_id: @user, params: { question: attributes_for(:invalid_question) }
         expect(response).to render_template :new
       end
     end

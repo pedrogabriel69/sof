@@ -15,6 +15,7 @@ gem 'rubocop', require: false
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'devise-bootstrap-views'
+gem 'simple_form'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -33,6 +34,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'rails-controller-testing'
   gem 'capybara'
+  gem 'launchy'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
