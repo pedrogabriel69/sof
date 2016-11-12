@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_answer, only: [:edit, :update, :destroy]
-  before_action :set_question, only: [:create, :destroy]
+  before_action :set_question, only: [:update, :create, :destroy, :edit]
 
   def edit
   end
@@ -40,6 +40,6 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:body).merge(user: User.last)
+    params.require(:answer).permit(:body).merge(user: current_user)
   end
 end

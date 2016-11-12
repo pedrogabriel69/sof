@@ -5,9 +5,7 @@
         %h3
           = @question.user.name
           %p= @question.title
-        %br/
         = @question.body
-        %br/
         .col-md-offset-10.col-md-2
           - if user_signed_in? && current_user == @question.user
             %strong
@@ -19,16 +17,14 @@
         - if @question.answers.present?
           %h3
             = "#{@question.answers.count} Answers"
-            %br/
           - @question.answers.each do |answer|
             %br/
             %strong= answer.user.name
-            %br/
+            %br
             = answer.body
-            %br/
             .col-md-offset-10.col-md-2
               - if user_signed_in? && current_user == answer.user
-                = link_to 'Edit', edit_question_answer_path(answer)
+                = link_to 'Edit', edit_question_answer_path(@question, answer)
                 |
                 = link_to 'Delete', [@question, answer], method: :delete, data: { confirm: 'Are you sure?' }
             %hr/
