@@ -1,15 +1,7 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_answer, only: [:show, :edit, :update, :destroy]
-  before_action :set_question, only: [:new, :create, :destroy]
-
-  def show
-  end
-
-  def new
-    @question = Question.find(params[:question_id])
-    @answer = Answer.new
-  end
+  before_action :set_answer, only: [:edit, :update, :destroy]
+  before_action :set_question, only: [:create, :destroy]
 
   def edit
   end
