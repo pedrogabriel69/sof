@@ -11,9 +11,11 @@
         %br/
         %br/
         .col-md-offset-10.col-md-2
-          = link_to 'Edit', edit_question_path(@question)
-          |
-          = link_to 'Delete', @question, method: :delete, data: { confirm: 'Are you sure?' }
+          - if user_signed_in? && current_user == @question.user
+            %strong
+              = link_to 'Edit', edit_question_path(@question)
+              |
+              = link_to 'Delete', @question, method: :delete, data: { confirm: 'Are you sure?' }
         %hr/
 
         - if @question.answers.present?
@@ -27,13 +29,15 @@
             = answer.body
             %br/
             .col-md-offset-10.col-md-2
-              = link_to 'Edit', edit_question_answer_path(answer)
-              |
-              = link_to 'Delete', [@question, answer], method: :delete, data: { confirm: 'Are you sure?' }
+              - if user_signed_in? && current_user == answer.user
+                = link_to 'Edit', edit_question_answer_path(answer)
+                |
+                = link_to 'Delete', [@question, answer], method: :delete, data: { confirm: 'Are you sure?' }
             %hr/
 
-        = simple_form_for([@question, @answer], remote: true, html: { role: "form" }) do |f|
-          = render 'common/errors', resource: @answer
-          .form-group
-            = f.input :body, label: false, placeholder: 'Your answer'
-          = f.submit "Save", class: "btn btn-primary"
+        - if user_signed_in?
+          = simple_form_for([@question, @answer], remote: true, html: { role: "form" }) do |f|
+            = render 'common/errors', resource: @answer
+            .form-group
+              = f.input :body, label: false, placeholder: 'Your answer'
+            = f.submit "Save", class: "btn btn-primary"
