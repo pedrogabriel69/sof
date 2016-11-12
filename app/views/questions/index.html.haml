@@ -1,7 +1,16 @@
-%h1 Questions
-- @questions.each do |question|
-  %br/
-  = question.title
-  = link_to 'Show', question
-  = link_to 'Edit', edit_question_path(question)
-  = link_to 'Delete', question, method: :delete, data: { confirm: 'Are you sure?' }
+.container
+  .row
+    .col-md-offset-1.col-md-10.col-md-offset-1
+      %ul
+        - @questions.each do |question|
+          = link_to "#{question.title}", question
+          %br/
+          %br/
+          = question.body
+          %br/
+          %br/
+          .col-md-offset-10.col-md-2
+            = link_to 'Edit', edit_question_path(question)
+            |
+            = link_to 'Delete', question, method: :delete, data: { confirm: 'Are you sure?' }
+          %hr/
