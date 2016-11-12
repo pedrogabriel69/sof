@@ -5,9 +5,7 @@
         - @questions.each do |question|
           %h3= link_to "#{question.title}", question
           %br/
-          %br/
           = question.body
-          %br/
           %br/
           .col-md-offset-10.col-md-2
             - if user_signed_in? && current_user == question.user

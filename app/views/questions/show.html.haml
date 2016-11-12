@@ -2,13 +2,11 @@
   .row
     .col-md-offset-1.col-md-10.col-md-offset-1
       %ul
-        %strong= @question.user.name
-        %br/
-        %strong= @question.title
-        %br/
+        %h3
+          = @question.user.name
+          %p= @question.title
         %br/
         = @question.body
-        %br/
         %br/
         .col-md-offset-10.col-md-2
           - if user_signed_in? && current_user == @question.user
@@ -19,7 +17,7 @@
         %hr/
 
         - if @question.answers.present?
-          %strong
+          %h3
             = "#{@question.answers.count} Answers"
             %br/
           - @question.answers.each do |answer|
