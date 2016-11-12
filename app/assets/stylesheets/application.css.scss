@@ -21,7 +21,13 @@ body {
   padding-top: 50px;
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
+footer {
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 150px;
+    }
+  }
 }

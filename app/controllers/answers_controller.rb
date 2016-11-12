@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
   before_action :set_answer, only: [:show, :edit, :update, :destroy]
-  before_action :set_question, only: [:new, :create]
+  before_action :set_question, only: [:new, :create, :destroy]
 
   def index
     @answers = Answer.all
@@ -37,7 +37,7 @@ class AnswersController < ApplicationController
 
   def destroy
     @answer.destroy
-    redirect_to questions_path
+    redirect_to @question
   end
 
   private
