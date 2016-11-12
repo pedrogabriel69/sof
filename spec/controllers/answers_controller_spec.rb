@@ -1,66 +1,37 @@
 require 'rails_helper'
 
 RSpec.describe AnswersController, type: :controller do
-  let(:user) { create(:user) }
-  let(:question) { create(:question, user: user) }
-  let(:answer) { create(:answer, user: user, question: question) }
-
-  describe 'GET #show' do
-    before { get :show, params: { question_id: question, id: answer } }
-
-    it 'show object' do
-      expect(assigns(:answer)).to eq answer
-    end
-
-    it 'render show view' do
-      expect(response).to render_template :show
-    end
-  end
-
-  describe 'GET #new' do
-    before { get :new, params: { question_id: question, id: answer } }
-
-    it 'new object' do
-      expect(assigns(:answer)).to be_a_new(Answer)
-    end
-
-    it 'render new view' do
-      expect(response).to render_template :new
-    end
-  end
+  sign_in_user
+  let(:question) { create(:question, user: @user) }
+  let(:answer) { create(:answer, user: @user, question: question) }
 
   describe 'GET #edit' do
-    before { get :edit, params: { question_id: question, id: answer } }
+    before { get :edit, params: { question_id: question.id, id: answer.id } }
 
     it 'edit object' do
       expect(assigns(:answer)).to eq answer
     end
 
     it 'render edit view' do
-      expect(response).to render_template :edit
+      expect(response).to render_template(:edit)
     end
   end
 
   describe 'POST #create' do
     context 'correct work' do
       it 'create object' do
-        expect { post :create, params: { question_id: question, user_id: user, answer: attributes_for(:answer) } }.to change(question.answers, :count).by(1)
+        expect { post :create, params: { user_id: @user, question_id: question, answer: attributes_for(:answer) } }.to change(question.answers, :count).by(1)
       end
 
       it 'render show view' do
-        post :create, params: { question_id: question, user_id: user, answer: attributes_for(:answer) }
-        expect(response).to redirect_to questions_path
+        post :create, params: { user_id: @user, question_id: question, answer: attributes_for(:answer) }
+        expect(response).to redirect_to question
       end
     end
 
     context 'not correct work' do
       it 'create object' do
-        expect { post :create, params: { question_id: question, user_id: user, answer: attributes_for(:invalid_answer) } }.to_not change(question.answers, :count)
-      end
-
-      it 're-render new view' do
-        post :create, params: { question_id: question, user_id: user, answer: attributes_for(:invalid_answer) }
-        expect(response).to render_template :new
+        expect { post :create, params: { question_id: question, user_id: @user, answer: attributes_for(:invalid_answer) } }.to_not change(question.answers, :count)
       end
     end
   end
@@ -108,7 +79,7 @@ RSpec.describe AnswersController, type: :controller do
 
     it 'redirect to index view' do
       delete :destroy, params: { question_id: question, id: answer }
-      expect(response).to redirect_to questions_path
+      expect(response).to redirect_to question
     end
   end
 end
