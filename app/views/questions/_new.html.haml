@@ -1,0 +1,16 @@
+#del_poll_modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        = button_to '#', data: { dismiss: 'modal' }, class: 'close' do
+          = content_tag :span, 'x'
+        %h4.modal-title
+          Ask question
+      .modal-body
+        = simple_form_for(:question, url: create_question_path) do |f|
+          .form-group
+            = f.input :title, label: false, placeholder: 'Title'
+            = f.input :body, label: false, placeholder: 'Your answer'
+            .modal-footer
+              = button_to 'Cancel', '#', class: 'btn btn-default', data: { dismiss: 'modal' }
+              = f.submit  "Save", class: "btn btn-primary"
