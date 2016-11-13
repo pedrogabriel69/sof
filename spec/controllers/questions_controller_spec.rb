@@ -61,7 +61,7 @@ RSpec.describe QuestionsController, type: :controller do
   describe 'POST #create' do
     context 'correct work' do
       it 'create object' do
-        expect { post :create, user_id: @user, params: { question: attributes_for(:question) } }.to change(Question, :count).by(1)
+        expect { post :create, user_id: @user, params: { question: attributes_for(:question) } }.to change(@user.questions, :count).by(1)
       end
 
       it 'render show view' do
@@ -72,7 +72,7 @@ RSpec.describe QuestionsController, type: :controller do
 
     context 'not correct work' do
       it 'create object' do
-        expect { post :create, user_id: @user, params: { question: attributes_for(:invalid_question) } }.to_not change(Question, :count)
+        expect { post :create, user_id: @user, params: { question: attributes_for(:invalid_question) } }.to_not change(@user.questions, :count)
       end
     end
   end

@@ -24,6 +24,7 @@ RSpec.describe AnswersController, type: :controller do
     context 'correct work' do
       it 'create object' do
         expect { post :create, params: { user_id: @user, question_id: question, answer: attributes_for(:answer) } }.to change(question.answers, :count).by(1)
+        expect { post :create, params: { user_id: @user, question_id: question, answer: attributes_for(:answer) } }.to change(@user.answers, :count).by(1)
       end
 
       it 'render show view' do
@@ -35,6 +36,7 @@ RSpec.describe AnswersController, type: :controller do
     context 'not correct work' do
       it 'create object' do
         expect { post :create, params: { question_id: question, user_id: @user, answer: attributes_for(:invalid_answer) } }.to_not change(question.answers, :count)
+        expect { post :create, params: { question_id: question, user_id: @user, answer: attributes_for(:invalid_answer) } }.to_not change(@user.answers, :count)
       end
     end
   end
