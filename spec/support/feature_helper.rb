@@ -6,7 +6,7 @@ module FeatureHelper
     click_button 'Sign in'
   end
 
-  def sign_out(user)
+  def sign_out(_user)
     click_on 'Log out'
   end
 end
