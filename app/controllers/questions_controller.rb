@@ -18,18 +18,18 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(question_params)
+    @question = Question.new(question_params.merge(user_id: current_user.id))
 
     if @question.save
       redirect_to @question
       flash[:notice] = 'Your question successfully created.'
     else
-      render :new
+      flash[:notice] = 'Fail, try again.'
     end
   end
 
   def update
-    if @question.update(question_params)
+    if @question.update(question_params.merge(user_id: current_user.id))
       redirect_to @question
     else
       render :edit
@@ -37,8 +37,10 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question.destroy
-    redirect_to questions_path
+    if current_user.author?(@question)
+      @question.destroy
+      redirect_to questions_path
+    end
   end
 
   private
@@ -48,6 +50,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :body).merge(user: current_user)
+    params.require(:question).permit(:title, :body)
   end
 end

@@ -8,4 +8,8 @@ class User < ApplicationRecord
   has_many :answers, dependent: :destroy
 
   validates :name, presence: true
+
+  def author?(object)
+    id == object.user.id
+  end
 end

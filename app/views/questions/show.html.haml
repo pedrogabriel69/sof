@@ -7,7 +7,7 @@
           %p= @question.title
         = @question.body
         .col-md-offset-10.col-md-2
-          - if user_signed_in? && current_user == @question.user
+          - if user_signed_in? && current_user.author?(@question)
             %strong
               = link_to 'Edit', edit_question_path(@question)
               |
@@ -23,7 +23,7 @@
             %br
             = answer.body
             .col-md-offset-10.col-md-2
-              - if user_signed_in? && current_user == answer.user
+              - if user_signed_in? && current_user.author?(answer)
                 = link_to 'Edit', edit_question_answer_path(@question, answer)
                 |
                 = link_to 'Delete', [@question, answer], method: :delete, data: { confirm: 'Are you sure?' }
@@ -34,4 +34,4 @@
             = render 'common/errors', resource: @answer
             .form-group
               = f.input :body, label: false, placeholder: 'Your answer'
-            = f.submit "Save", class: "btn btn-primary"
+            = f.submit "Save", class: "btn btn-primary btn-sm"

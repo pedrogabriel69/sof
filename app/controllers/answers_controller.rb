@@ -7,16 +7,18 @@ class AnswersController < ApplicationController
   end
 
   def create
-    @answer = @question.answers.new(answer_params)
+    @answer = @question.answers.new(answer_params.merge(user_id: current_user.id))
 
     if @answer.save
       redirect_to @question
       flash[:notice] = 'Your answer successfully created.'
+    else
+      flash[:notice] = 'Fail, try again.'
     end
   end
 
   def update
-    if @answer.update(answer_params)
+    if @answer.update(answer_params.merge(user_id: current_user.id))
       redirect_to questions_path
     else
       render :edit
@@ -24,8 +26,10 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    @answer.destroy
-    redirect_to @question
+    if current_user.author?(@answer)
+      @answer.destroy
+      redirect_to @question
+    end
   end
 
   private
@@ -39,6 +43,6 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:body).merge(user: current_user)
+    params.require(:answer).permit(:body)
   end
 end

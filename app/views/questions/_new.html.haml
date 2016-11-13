@@ -9,8 +9,8 @@
       .modal-body
         = simple_form_for(:question, url: create_question_path) do |f|
           .form-group
-            = f.input :title, label: false, placeholder: 'Title'
-            = f.input :body, label: false, placeholder: 'Your answer'
+            = f.input :title, label: false, placeholder: 'Title', hint: 'Can\'t be empty'
+            = f.input :body, label: false, placeholder: 'Your answer', hint: 'Can\'t be empty'
             .modal-footer
               = button_to 'Cancel', '#', class: 'btn btn-default', data: { dismiss: 'modal' }
               = f.submit  "Save", class: "btn btn-primary"
