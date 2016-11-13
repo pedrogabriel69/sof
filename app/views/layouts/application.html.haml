@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title SOF
+    %title The Developer
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
     = csrf_meta_tags
@@ -14,14 +14,12 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          = link_to 'SOF', root_path, class: 'navbar-brand'
+          = link_to 'The Developer', root_path, class: 'navbar-brand'
         .collapse.navbar-collapse#navbar
           %ul.nav.navbar-nav
             - if user_signed_in?
               %li.nav-item
-                = link_to "#{current_user.name}, ask question", new_question_path, class: 'nav-link'
-                -#= link_to "#{current_user.name}, ask question", "#del_poll_modal", class: 'nav-link', "data-toggle" => "modal"
-                -#= render 'new'
+                -#= link_to "#{current_user.name}, ask question", new_question_path, class: 'nav-link'
           %ul.nav.navbar-nav.pull-right
             %li.nav-item
               - if user_signed_in?
