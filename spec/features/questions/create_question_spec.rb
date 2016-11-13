@@ -10,9 +10,9 @@ feature 'User create question', '
     sign_in(user)
 
     visit questions_path
-    first(:link, 'MyString, ask question').click
+    first(:link, 'Ask question').click
     fill_in('Title', with: 'Test question')
-    fill_in('Body', with: 'body text')
+    fill_in('Your question', with: 'body text')
     click_button 'Save'
 
     expect(page).to have_content 'Your question successfully created.'

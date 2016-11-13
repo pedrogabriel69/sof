@@ -5,6 +5,9 @@ RSpec.describe AnswersController, type: :controller do
   let(:question) { create(:question, user: @user) }
   let(:answer) { create(:answer, user: @user, question: question) }
 
+  let(:user) { create(:user, email: 'test@test.io') }
+  let!(:other_answer) { create(:answer, user: user, question: question) }
+
   describe 'GET #edit' do
     before { get :edit, params: { question_id: question.id, id: answer.id } }
 
@@ -74,12 +77,16 @@ RSpec.describe AnswersController, type: :controller do
   describe 'DELETE #destroy' do
     it 'destroy answer' do
       answer
-      expect { delete :destroy, params: { question_id: question, id: answer } }.to change(Answer, :count).by(-1)
+      expect { delete :destroy, params: { question_id: question, id: answer } }.to change(question.answers, :count).by(-1)
     end
 
     it 'redirect to index view' do
       delete :destroy, params: { question_id: question, id: answer }
       expect(response).to redirect_to question
+    end
+
+    it 'user tries destroy not own answer' do
+      expect { delete :destroy, params: { question_id: question, id: other_answer } }.to_not change(question.answers, :count)
     end
   end
 end

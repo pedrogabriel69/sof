@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe QuestionsController, type: :controller do
   sign_in_user
   let(:question) { create(:question, user: @user) }
-  let(:answer) { create(:answer, user: @user, question: question) }
+
+  let(:user) { create(:user, email: 'test@test.io') }
+  let!(:other_question) { create(:question, user: user) }
 
   describe 'GET #index' do
     let(:q1) { create(:question, user: @user) }
@@ -12,7 +14,7 @@ RSpec.describe QuestionsController, type: :controller do
     before { get :index }
 
     it 'show all objects' do
-      expect(assigns(:questions)).to match_array([q1, q2])
+      expect(assigns(:questions)).to match_array([q1, q2, other_question])
     end
 
     it 'render index view' do
@@ -72,11 +74,6 @@ RSpec.describe QuestionsController, type: :controller do
       it 'create object' do
         expect { post :create, user_id: @user, params: { question: attributes_for(:invalid_question) } }.to_not change(Question, :count)
       end
-
-      it 're-render new view' do
-        post :create, user_id: @user, params: { question: attributes_for(:invalid_question) }
-        expect(response).to render_template :new
-      end
     end
   end
 
@@ -126,6 +123,10 @@ RSpec.describe QuestionsController, type: :controller do
     it 'redirect to index view' do
       delete :destroy, params: { id: question }
       expect(response).to redirect_to questions_path
+    end
+
+    it 'user tries destroy not own question' do
+      expect { delete :destroy, params: { id: other_question } }.to_not change(Question, :count)
     end
   end
 end
