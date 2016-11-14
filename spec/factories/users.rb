@@ -4,7 +4,7 @@ FactoryGirl.define do
   end
 
   factory :user do
-    name 'MyString'
+    name 'MyName'
     email
     password '1qwerty111'
     password_confirmation '1qwerty111'

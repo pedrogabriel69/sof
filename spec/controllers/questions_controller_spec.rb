@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
   sign_in_user
-  let(:question) { create(:question, user: @user) }
+  let(:question) { create(:question, title: 'Question title', body: 'Question body', user: @user) }
 
   let(:user) { create(:user, email: 'test@test.io') }
   let!(:other_question) { create(:question, user: user) }
@@ -103,8 +103,8 @@ RSpec.describe QuestionsController, type: :controller do
       it 'not change attributes' do
         patch :update, id: question, question: { title: 'new title', body: nil }
         question.reload
-        expect(question.title).to eq 'MyString'
-        expect(question.body).to eq 'MyText'
+        expect(question.title).to eq 'Question title'
+        expect(question.body).to eq 'Question body'
       end
 
       it 're-render edit view' do

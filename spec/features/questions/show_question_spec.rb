@@ -12,6 +12,7 @@ feature 'User see question with answers', '
 
     visit question_path(question)
 
-    expect(page).to have_content 'MyString MyString MyText Edit | Delete'
+    expect(page).to have_content(question.title)
+    expect(page).to have_content(question.body)
   end
 end

@@ -11,10 +11,10 @@ feature 'User create question', '
     sign_in(user)
 
     visit question_path(question)
-    fill_in('Your answer', with: 'body text')
+    fill_in('Your answer', with: 'My Answer')
     click_button 'Save'
 
-    expect(question.answers.last.user).to eq user
-    expect(question.answers.last.body).to have_content 'body text'
+    expect(page).to have_content user.name
+    expect(page).to have_content 'My Answer'
   end
 end

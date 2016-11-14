@@ -12,6 +12,9 @@ feature 'User see list of questions', '
     sign_in(user)
     visit questions_path
 
-    expect(page).to have_content 'MyString MyText Edit | Delete MyString MyText Edit | Delete'
+    expect(page).to have_content(q1.title)
+    expect(page).to have_content(q1.body)
+    expect(page).to have_content(q2.title)
+    expect(page).to have_content(q2.body)
   end
 end
