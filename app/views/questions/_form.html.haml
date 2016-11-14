@@ -2,7 +2,7 @@
   = button_to '#', data: { dismiss: 'modal' }, class: 'close' do
     = content_tag :span, 'x'
   %h4.modal-title
-    Edit question
+    = "#{@question.new_record? ? 'Ask question' : 'Edit question'}"
 .modal-body
   = simple_form_for(@question) do |f|
     = render 'common/errors', resource: @question
@@ -11,4 +11,4 @@
       = f.input :body, label: false, input_html: { value: @question.body }, hint: 'Can\'t be empty'
       .modal-footer
         = button_to 'Cancel', '#', class: 'btn btn-default', data: { dismiss: 'modal' }
-        = f.submit  "Save", class: "btn btn-primary"
+        = f.submit  "#{@question.new_record? ? 'Save' : 'Edit'}", class: "btn btn-primary"
