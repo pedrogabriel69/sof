@@ -7,8 +7,8 @@
   = simple_form_for(@question) do |f|
     = render 'common/errors', resource: @question
     .form-group
-      = f.input :title, label: false, input_html: { value: @question.title }, hint: 'Can\'t be empty'
-      = f.input :body, label: false, input_html: { value: @question.body }, hint: 'Can\'t be empty'
+      = f.input :title, label: false, placeholder: 'Title', input_html: { value: "#{@question.new_record? ? '' : @question.title}" }, hint: 'Can\'t be empty'
+      = f.input :body, label: false, placeholder: 'Your question', input_html: { value: "#{@question.new_record? ? '' : @question.body}" }, hint: 'Can\'t be empty'
       .modal-footer
         = button_to 'Cancel', '#', class: 'btn btn-default', data: { dismiss: 'modal' }
         = f.submit  "#{@question.new_record? ? 'Save' : 'Edit'}", class: "btn btn-primary"

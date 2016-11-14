@@ -79,7 +79,7 @@ RSpec.describe AnswersController, type: :controller do
   describe 'DELETE #destroy' do
     it 'destroy answer' do
       answer
-      expect { delete :destroy, params: { question_id: question, id: answer } }.to change(question.answers, :count).by(-1)
+      expect { delete :destroy, params: { question_id: question, id: answer } }.to change(Answer, :count).by(-1)
     end
 
     it 'redirect to index view' do
@@ -88,7 +88,7 @@ RSpec.describe AnswersController, type: :controller do
     end
 
     it 'user tries destroy not own answer' do
-      expect { delete :destroy, params: { question_id: question, id: other_answer } }.to_not change(question.answers, :count)
+      expect { delete :destroy, params: { question_id: question, id: other_answer } }.to_not change(Answer, :count)
     end
   end
 end

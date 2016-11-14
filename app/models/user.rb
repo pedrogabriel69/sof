@@ -10,6 +10,6 @@ class User < ApplicationRecord
   validates :name, presence: true
 
   def author?(object)
-    id == object.user.id
+    id == object.user_id
   end
 end

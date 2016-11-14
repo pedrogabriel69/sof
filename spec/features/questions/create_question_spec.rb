@@ -10,7 +10,7 @@ feature 'User create question', '
     sign_in(user)
 
     visit questions_path
-    first(:link, 'Ask question').click
+    click_on('Ask question')
     fill_in('Title', with: 'Test question')
     fill_in('Your question', with: 'body text')
     click_button 'Save'

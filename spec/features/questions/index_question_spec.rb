@@ -5,13 +5,13 @@ feature 'User see list of questions', '
 ' do
 
   given(:user) { create(:user) }
-  given(:question) { create(:question, user: user) }
+  given!(:q1) { create(:question, user: user) }
+  given!(:q2) { create(:question, user: user) }
 
   scenario 'Registrated user see list of questions' do
     sign_in(user)
     visit questions_path
 
-    expect(question.title).to have_content 'MyString'
-    expect(question.body).to have_content 'MyText'
+    expect(page).to have_content 'MyString MyText Edit | Delete MyString MyText Edit | Delete'
   end
 end
