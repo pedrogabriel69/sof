@@ -8,10 +8,12 @@
         = @question.body
         .col-md-offset-10.col-md-2
           - if user_signed_in? && current_user.author?(@question)
-            %strong
-              = link_to 'Edit', edit_question_path(@question)
-              |
-              = link_to 'Delete', @question, method: :delete, data: { confirm: 'Are you sure?' }
+            = link_to 'Edit', edit_question_path(@question), "data-target": "#edit_modal", "data-toggle": "modal"
+            #edit_modal.modal.fade
+              .modal-dialog
+                .modal-content
+            |
+            = link_to 'Delete', @question, method: :delete, data: { confirm: 'Are you sure?' }
         %hr/
 
         - if @question.answers.present?
