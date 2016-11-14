@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
-  root 'questions#index'
 
-  post '/create_question', to: 'questions#create'
+  root 'questions#index'
 
   resources :questions do
     resources :answers

@@ -6,8 +6,10 @@
         = link_to "Questions", "#", :class => "btn btn-success btn-sm"
         = link_to "Tags", "#", :class => "btn btn-success btn-sm"
         = link_to "Users", "#", :class => "btn btn-success btn-sm"
-        = link_to "Ask question", "#new_modal", :class => "btn btn-success btn-sm", "data-toggle" => "modal"
-        = render 'new'
+        = link_to "Ask question", new_question_path, :class => "btn btn-success btn-sm", "data-target": "#new_modal", "data-toggle": "modal"
+        #new_modal.modal.fade
+          .modal-dialog
+            .modal-content
     .col-md-offset-1.col-md-10.col-md-offset-1
       %ul
         - @questions.each do |question|
@@ -17,9 +19,10 @@
           %br/
           .col-md-offset-10.col-md-2
             - if user_signed_in? && current_user.author?(question)
-              %strong
-                = link_to 'Edit', "#del_poll_modal", "data-toggle" => "modal"
-                = render 'new'
-                |
-                = link_to 'Delete', question, method: :delete, data: { confirm: 'Are you sure?' }
+              = link_to 'Edit', edit_question_path(question), "data-target": "#edit_modal", "data-toggle": "modal"
+              #edit_modal.modal.fade
+                .modal-dialog
+                  .modal-content
+              |
+              = link_to 'Delete', question, method: :delete, data: { confirm: 'Are you sure?' }
           %hr/

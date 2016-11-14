@@ -4,6 +4,7 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = Question.all
+    @question = Question.new
   end
 
   def show
@@ -12,9 +13,11 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
+    render :new, layout: false
   end
 
   def edit
+    render :edit, layout: false
   end
 
   def create

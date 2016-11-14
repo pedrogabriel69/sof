@@ -1,13 +1,1 @@
-.container
-  .row
-    .col-md-offset-3.col-md-6.col-md-offset-3
-      .panel.panel-default.devise-bs
-        .panel-heading
-          %h4= "New question"
-        .panel-body
-          = simple_form_for(@question, html: { role: "form" }) do |f|
-            = render 'common/errors', resource: @question
-            .form-group
-              = f.input :title, label: false, placeholder: 'Title'
-              = f.input :body, label: false, placeholder: 'Body'
-            = f.submit  "Save", class: "btn btn-primary btn-sm"
+= render 'form'

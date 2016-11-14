@@ -1,0 +1,14 @@
+.modal-header
+  = button_to '#', data: { dismiss: 'modal' }, class: 'close' do
+    = content_tag :span, 'x'
+  %h4.modal-title
+    Edit question
+.modal-body
+  = simple_form_for(@question) do |f|
+    = render 'common/errors', resource: @question
+    .form-group
+      = f.input :title, label: false, input_html: { value: @question.title }, hint: 'Can\'t be empty'
+      = f.input :body, label: false, input_html: { value: @question.body }, hint: 'Can\'t be empty'
+      .modal-footer
+        = button_to 'Cancel', '#', class: 'btn btn-default', data: { dismiss: 'modal' }
+        = f.submit  "Save", class: "btn btn-primary"
