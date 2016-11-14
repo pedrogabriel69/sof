@@ -9,7 +9,7 @@ RSpec.describe User, type: :model do
 
   describe '#author?' do
     let(:user) { create(:user) }
-    let(:new_user) { create(:user, email: 'sample@sample.org') }
+    let(:new_user) { create(:user) }
     let(:question) { create(:question, user: user) }
 
     it 'User is author this question' do
