@@ -24,7 +24,8 @@ feature 'User sign up', '
     fill_in('Password confirmation', with: '1234567890')
     click_button 'Sign up'
 
-    expect(page).to have_content "× 1 error prohibited this user from being saved: Password confirmation doesn't match Password Sign up doesn't match Password"
+    expect(page).to have_content "× 1 error prohibited this user from being saved:
+                                 Password confirmation doesn't match Password Sign up doesn't match Password"
     expect(current_path).to eq '/users'
   end
 end
