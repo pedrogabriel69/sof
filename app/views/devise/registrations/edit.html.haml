@@ -1,7 +1,7 @@
 .container
   .row
     .col-md-12
-      = bootstrap_devise_error_messages!
+      = bootstrap_devise_error_messages!(resource)
       .panel.panel-default.devise-bs
         .panel-heading
           %h4= t('.title', :resource => resource_class.model_name.human , :default => "Edit #{resource_name.to_s.humanize}")

@@ -8,6 +8,8 @@ AllCops:
     - 'vendor/**/*'
     - 'db/**/*'
     - 'bin/**/*'
+    - 'spec/**/*.rb'
+    - 'config/initializers/*.rb'
   DisplayCopNames: true
 Rails:
   Enabled: true
@@ -20,9 +22,9 @@ Rails/Validation:
 Rails/FindBy:
   Enabled: false
 Metrics/LineLength:
-  Max: 250
+  Max: 100
 Metrics/ClassLength:
-  Max: 250
+  Max: 100
 Metrics/AbcSize:
   Max: 30
 Metrics/CyclomaticComplexity:
