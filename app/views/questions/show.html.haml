@@ -14,9 +14,10 @@
             = "#{@question.answers.count} Answers"
           - @question.answers.each do |answer|
             %br/
-            %strong= answer.user.name
-            %br
-            = answer.body
+            .answers
+              %strong= answer.user.name
+              %br
+              = answer.body
             .col-md-offset-10.col-md-2
               - if user_signed_in? && current_user.author?(answer)
                 = link_to 'Edit', edit_question_answer_path(@question, answer), "data-target": "#edit_answer_modal", "data-toggle": "modal"
