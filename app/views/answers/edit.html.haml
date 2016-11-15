@@ -5,7 +5,7 @@
     Edit answer
 .modal-body
   = simple_form_for([@question, @answer]) do |f|
-    = devise_error_messages!(@answer)
+    = bootstrap_devise_error_messages!(@answer)
     .form-group
       = f.input :body, label: false, placeholder: 'Your answer', input_html: { value: @answer.body }, hint: 'Can\'t be empty'
       .modal-footer
