@@ -29,7 +29,11 @@
 
         - if user_signed_in?
           = simple_form_for([@question, @answer], remote: true, html: { role: "form" }) do |f|
+<<<<<<< HEAD
             = devise_error_messages!(@answer)
+=======
+          
+>>>>>>> df0f4010353b52b2386c8b7d5dae3ec6b2379e95
             .form-group
               = f.input :body, label: false, placeholder: 'Your answer'
             = f.submit "Save", class: "btn btn-primary btn-sm"
