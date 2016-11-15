@@ -47,7 +47,7 @@ RSpec.describe AnswersController, type: :controller do
     context 'correct work' do
       it 'update object' do
         patch :update, params: { question_id: question, id: answer, answer: attributes_for(:answer) }
-        expect(response).to redirect_to questions_path
+        expect(response).to redirect_to question
       end
 
       it 'change attributes' do
@@ -58,7 +58,7 @@ RSpec.describe AnswersController, type: :controller do
 
       it 'render show view' do
         patch :update, question_id: question, id: answer, answer: { body: 'new body' }
-        expect(response).to redirect_to questions_path
+        expect(response).to redirect_to question
       end
     end
 

@@ -4,6 +4,7 @@ class AnswersController < ApplicationController
   before_action :set_question, only: [:update, :create, :destroy, :edit]
 
   def edit
+    render :edit, layout: false
   end
 
   def create
@@ -19,7 +20,7 @@ class AnswersController < ApplicationController
 
   def update
     if @answer.update(answer_params.merge(user_id: current_user.id))
-      redirect_to questions_path
+      redirect_to @question
     else
       render :edit
     end

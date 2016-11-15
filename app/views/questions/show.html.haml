@@ -1,20 +1,13 @@
 .container
   .row
+    = render 'buttons'
     .col-md-offset-1.col-md-10.col-md-offset-1
       %ul
         %h3
           = @question.user.name
           %p= @question.title
         = @question.body
-        .col-md-offset-10.col-md-2
-          - if user_signed_in? && current_user.author?(@question)
-            = link_to 'Edit', edit_question_path(@question), "data-target": "#edit_modal", "data-toggle": "modal"
-            #edit_modal.modal.fade
-              .modal-dialog
-                .modal-content
-            |
-            = link_to 'Delete', @question, method: :delete, data: { confirm: 'Are you sure?' }
-        %hr/
+        = render 'links', question: @question
 
         - if @question.answers.present?
           %h3
@@ -26,7 +19,10 @@
             = answer.body
             .col-md-offset-10.col-md-2
               - if user_signed_in? && current_user.author?(answer)
-                = link_to 'Edit', edit_question_answer_path(@question, answer)
+                = link_to 'Edit', edit_question_answer_path(@question, answer), "data-target": "#edit_answer_modal", "data-toggle": "modal"
+                #edit_answer_modal.modal.fade
+                  .modal-dialog
+                    .modal-content
                 |
                 = link_to 'Delete', [@question, answer], method: :delete, data: { confirm: 'Are you sure?' }
             %hr/

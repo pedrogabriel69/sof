@@ -1,0 +1,13 @@
+.modal-header
+  = button_to '#', data: { dismiss: 'modal' }, class: 'close' do
+    = content_tag :span, 'x'
+  %h4.modal-title
+    Edit answer
+.modal-body
+  = simple_form_for([@question, @answer]) do |f|
+    = devise_error_messages!(@answer)
+    .form-group
+      = f.input :body, label: false, placeholder: 'Your answer', input_html: { value: @answer.body }, hint: 'Can\'t be empty'
+      .modal-footer
+        = button_to 'Cancel', '#', class: 'btn btn-default btn-sm', data: { dismiss: 'modal' }
+        = f.submit 'Edit', class: "btn btn-primary btn-sm"
