@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'features_helper'
 
 feature 'User see question with answers', '
   I want to be able see question with answers

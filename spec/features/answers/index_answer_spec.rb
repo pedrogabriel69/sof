@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'features_helper'
 
 feature 'User see question and list of answers', '
   I want to be able see answers and question
