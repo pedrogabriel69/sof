@@ -12,21 +12,9 @@
         - if @question.answers.present?
           %h3
             = "#{@question.answers.count} Answers"
+        .answers  
           - @question.answers.each do |answer|
-            %br/
-            .answers
-              %strong= answer.user.name
-              %br
-              = answer.body
-            .col-md-offset-10.col-md-2
-              - if user_signed_in? && current_user.author?(answer)
-                = link_to 'Edit', edit_question_answer_path(@question, answer), "data-target": "#edit_answer_modal", "data-toggle": "modal"
-                #edit_answer_modal.modal.fade
-                  .modal-dialog
-                    .modal-content
-                |
-                = link_to 'Delete', [@question, answer], method: :delete, data: { confirm: 'Are you sure?' }
-            %hr/
+            = render 'answers', answer: answer
 
         - if user_signed_in?
           = simple_form_for([@question, @answer], remote: true, html: { role: "form" }) do |f|

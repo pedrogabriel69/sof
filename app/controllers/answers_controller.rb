@@ -8,10 +8,9 @@ class AnswersController < ApplicationController
   end
 
   def create
-    @answer = @question.answers.new(answer_params.merge(user_id: current_user.id))
+    @answer = @question.answers.build(answer_params.merge(user_id: current_user.id))
 
     if @answer.save
-      redirect_to @question
       flash[:notice] = 'Your answer successfully created.'
     else
       flash[:notice] = 'Fail, try again.'

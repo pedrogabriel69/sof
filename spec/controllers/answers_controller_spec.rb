@@ -23,20 +23,20 @@ RSpec.describe AnswersController, type: :controller do
   describe 'POST #create' do
     context 'correct work' do
       it 'create object' do
-        expect { post :create, params: { user_id: @user, question_id: question, answer: attributes_for(:answer) } }.to change(question.answers, :count).by(1)
-        expect { post :create, params: { user_id: @user, question_id: question, answer: attributes_for(:answer) } }.to change(@user.answers, :count).by(1)
+        expect { post :create, params: { user_id: @user, question_id: question, answer: attributes_for(:answer), format: :js } }.to change(question.answers, :count).by(1)
+        expect { post :create, params: { user_id: @user, question_id: question, answer: attributes_for(:answer), format: :js } }.to change(@user.answers, :count).by(1)
       end
 
       it 'render show view' do
-        post :create, params: { user_id: @user, question_id: question, answer: attributes_for(:answer) }
-        expect(response).to redirect_to question
+        post :create, params: { user_id: @user, question_id: question, answer: attributes_for(:answer), format: :js }
+        expect(response).to render_template :create
       end
     end
 
     context 'not correct work' do
       it 'create object' do
-        expect { post :create, params: { question_id: question, user_id: @user, answer: attributes_for(:invalid_answer) } }.to_not change(question.answers, :count)
-        expect { post :create, params: { question_id: question, user_id: @user, answer: attributes_for(:invalid_answer) } }.to_not change(@user.answers, :count)
+        expect { post :create, params: { question_id: question, user_id: @user, answer: attributes_for(:invalid_answer), format: :js } }.to_not change(question.answers, :count)
+        expect { post :create, params: { question_id: question, user_id: @user, answer: attributes_for(:invalid_answer), format: :js } }.to_not change(@user.answers, :count)
       end
     end
   end
