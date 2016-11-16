@@ -1,4 +1,4 @@
-require 'features_helper'
+require_relative 'features_helper'
 
 feature 'User sign in', '
   For checking sing in
