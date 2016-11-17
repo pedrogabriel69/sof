@@ -12,13 +12,12 @@
         - if @question.answers.present?
           %h3
             = "#{@question.answers.count} Answers"
-        .answers  
+        .answers
           - @question.answers.each do |answer|
             = render 'answers', answer: answer
 
         - if user_signed_in?
           = simple_form_for([@question, @answer], remote: true, html: { role: "form" }) do |f|
-            = bootstrap_devise_error_messages!(@answer)
-            .form-group
-              = f.input :body, label: false, placeholder: 'Your answer'
+            .answer_errors
+            = f.input :body, label: false, placeholder: 'Your answer'
             = f.submit "Save", class: "btn btn-primary btn-sm"

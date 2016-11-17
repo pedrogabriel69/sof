@@ -20,4 +20,13 @@ feature 'User create question', '
       expect(page).to have_content 'My Answer'
     end
   end
+
+  scenario 'User try to create invalid answer', js: true do
+    sign_in(user)
+
+    visit question_path(question)
+    click_button 'Save'
+
+    expect(page).to have_content "Body can't be blank"
+  end
 end
