@@ -1,28 +1,16 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_answer, only: [:edit, :update, :destroy]
-  before_action :set_question, only: [:update, :create, :destroy, :edit]
-
-  def edit
-    render :edit, layout: false
-  end
+  before_action :set_answer, only: [:update, :destroy]
+  before_action :set_question, only: [:create, :destroy]
 
   def create
     @answer = @question.answers.build(answer_params.merge(user_id: current_user.id))
-
-    if @answer.save
-      flash[:notice] = 'Your answer successfully created.'
-    else
-      flash[:notice] = 'Fail, try again.'
-    end
+    flash[:notice] = 'Your answer successfully created.' if @answer.save
   end
 
   def update
-    if @answer.update(answer_params.merge(user_id: current_user.id))
-      redirect_to @question
-    else
-      render :edit
-    end
+    @question = @answer.question
+    flash[:notice] = 'Your answer successfully updated.' if @answer.update(answer_params.merge(user_id: current_user.id))
   end
 
   def destroy
