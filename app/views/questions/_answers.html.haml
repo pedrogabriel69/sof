@@ -1,10 +1,16 @@
-%br/
-%strong= answer.user.name
-%br
-= answer.body
-.col-md-offset-10.col-md-2
-  - if user_signed_in? && current_user.author?(answer)
-    = link_to 'Edit', "#"
-    |
-    = link_to 'Delete', [@question, answer], method: :delete, data: { confirm: 'Are you sure?' }
+- if answer.persisted?
+  %br/
+  %strong= answer.user.name
+  %br
+  = answer.body
+  .col-md-offset-10.col-md-2
+    - if user_signed_in? && current_user.author?(answer)
+      = link_to 'Edit', "#"
+      |
+      = link_to 'Delete', [@question, answer], method: :delete, data: { confirm: 'Are you sure?' }, remote: true, id: "answers_#{@question.id}"
+
+= simple_form_for([@question, answer], remote: true, html: { role: "form" }) do |f|
+  .answer_errors
+  = f.input :body, label: false, placeholder: 'Your answer'
+  = f.submit "Save", class: "btn btn-primary btn-sm"
 %hr/

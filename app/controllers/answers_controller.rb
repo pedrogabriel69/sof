@@ -10,14 +10,11 @@ class AnswersController < ApplicationController
 
   def update
     @question = @answer.question
-    flash[:notice] = 'Your answer successfully updated.' if @answer.update(answer_params.merge(user_id: current_user.id))
+    flash[:notice] = 'Your answer successfully updated.' if @answer.update(answer_params)
   end
 
   def destroy
-    if current_user.author?(@answer)
-      @answer.destroy
-      redirect_to @question
-    end
+    @answer.destroy if current_user.author?(@answer)
   end
 
   private

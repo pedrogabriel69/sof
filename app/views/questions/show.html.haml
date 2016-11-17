@@ -12,9 +12,9 @@
         - if @question.answers.present?
           %h3
             = "#{@question.answers.count} Answers"
-        .answers
           - @question.answers.each do |answer|
-            = render 'answers', answer: answer
+            %div{id: "answer_#{answer.id}"}
+              = render 'answers', answer: answer
 
         - if user_signed_in?
           = simple_form_for([@question, @answer], remote: true, html: { role: "form" }) do |f|
