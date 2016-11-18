@@ -16,6 +16,7 @@ gem 'bootstrap-sass'
 gem 'devise'
 gem 'devise-bootstrap-views'
 gem 'simple_form'
+gem 'jquery-turbolinks'
 
 group :development, :test do
   gem 'byebug', platform: :mri
