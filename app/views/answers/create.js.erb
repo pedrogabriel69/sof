@@ -1,6 +1,6 @@
 <% if @answer.errors.present? %>
   $('.answer_errors').html("<%= j render 'common/errors', resource: @answer %>");
 <% else %>
-  $('#answer_<%= @answer.id %>').append("<%= j render 'questions/answers', answer: @answer %>");
-  $('#answer_body').val(' ');
+  $('.answers %>').append("<%= j render 'questions/answers', answer: @answer %>");
+  $('#answer_body').val('');
 <% end %>
