@@ -4,10 +4,10 @@ class Answer < ApplicationRecord
 
   validates :body, presence: true
 
-  def choose_answer(question)
-    old_answer = question.answers.where(flag: true).first
-    old_answer.update_attributes(flag: false) if old_answer
+  scope :ordered, -> { order(flag: :desc) }
 
-    update_attributes(flag: true)
+  def choose_answer(question)
+    question.answers.update_all(flag: false)
+    update(flag: true)
   end
 end
