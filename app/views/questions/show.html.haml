@@ -3,19 +3,18 @@
     = render 'buttons'
     .col-md-offset-1.col-md-10.col-md-offset-1
       %ul
-        %h3
-          = @question.user.name
-          %p= @question.title
-        = @question.body
-        = render 'links', question: @question
-
-        - if @question.answers.present?
+        .answers
           %h3
-            = "#{@question.answers.count} Answers"
-          .answers
-            - @question.answers.each do |answer|
-              %div{id: "answer_#{answer.id}"}
-                = render 'answers', answer: answer
+            = @question.user.name
+            %p= @question.title
+          = @question.body
+          = render 'links', question: @question
+
+          - if @question.answers.present?
+            %h3
+              = "#{@question.answers.count} Answers"
+            - @question.answers.order('created_at').each do |answer|
+              = render 'answers', answer: answer
 
         - if user_signed_in?
           = simple_form_for([@question, @answer], remote: true, html: { role: "form" }) do |f|
