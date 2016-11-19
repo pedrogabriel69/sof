@@ -18,7 +18,7 @@ class AnswersController < ApplicationController
   end
 
   def best
-    @answer.choose_answer(@question)
+    flash[:notice] = 'Your choose best answer.' if @answer.choose_answer(@question)
   end
 
   private
