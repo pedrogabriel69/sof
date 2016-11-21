@@ -8,18 +8,6 @@ RSpec.describe AnswersController, type: :controller do
   let(:user) { create(:user, email: 'test@test.io') }
   let!(:other_answer) { create(:answer, user: user, question: question) }
 
-  describe 'GET #edit' do
-    before { get :edit, params: { question_id: question.id, id: answer.id } }
-
-    it 'edit object' do
-      expect(assigns(:answer)).to eq answer
-    end
-
-    it 'render edit view' do
-      expect(response).to render_template(:edit)
-    end
-  end
-
   describe 'POST #create' do
     context 'correct work' do
       it 'create object' do
@@ -42,36 +30,24 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'PATCH #update' do
-    before { get :edit, params: { question_id: question, id: answer } }
-
     context 'correct work' do
       it 'update object' do
-        patch :update, params: { question_id: question, id: answer, answer: attributes_for(:answer) }
-        expect(response).to redirect_to question
+        patch :update, params: { question_id: question, id: answer, answer: attributes_for(:answer), format: :js }
+        expect(assigns(:answer)).to eq answer
       end
 
       it 'change attributes' do
-        patch :update, question_id: question, id: answer, answer: { body: 'new body' }
+        patch :update, question_id: question, id: answer, answer: { body: 'new body' }, format: :js
         answer.reload
         expect(answer.body).to eq 'new body'
-      end
-
-      it 'render show view' do
-        patch :update, question_id: question, id: answer, answer: { body: 'new body' }
-        expect(response).to redirect_to question
       end
     end
 
     context 'not correct work' do
       it 'not change attributes' do
-        patch :update, question_id: question, id: answer, answer: { body: nil }
+        patch :update, question_id: question, id: answer, answer: { body: nil }, format: :js
         answer.reload
         expect(answer.body).to eq 'My Answer'
-      end
-
-      it 're-render edit view' do
-        patch :update, question_id: question, id: answer, answer: { body: nil }
-        expect(response).to render_template :edit
       end
     end
   end
@@ -79,16 +55,11 @@ RSpec.describe AnswersController, type: :controller do
   describe 'DELETE #destroy' do
     it 'destroy answer' do
       answer
-      expect { delete :destroy, params: { question_id: question, id: answer } }.to change(Answer, :count).by(-1)
-    end
-
-    it 'redirect to index view' do
-      delete :destroy, params: { question_id: question, id: answer }
-      expect(response).to redirect_to question
+      expect { delete :destroy, params: { question_id: question, id: answer, format: :js } }.to change(Answer, :count).by(-1)
     end
 
     it 'user tries destroy not own answer' do
-      expect { delete :destroy, params: { question_id: question, id: other_answer } }.to_not change(Answer, :count)
+      expect { delete :destroy, params: { question_id: question, id: other_answer, format: :js } }.to_not change(Answer, :count)
     end
   end
 end

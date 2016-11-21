@@ -16,12 +16,24 @@ feature 'User edit answer', '
     expect(page).to_not have_link 'Edit'
   end
 
-  scenario 'User edit answer' do
+  scenario 'Authenticated user try to edit answer that was created not him', js: true do
+    sign_in(user)
+
+    visit question_path(question)
+
+    expect(current_path).to eq question_path(question)
+    within '.answers' do
+      expect(page).to_not have_link 'Edit'
+    end
+  end
+
+  scenario 'Authenticated user try to edit his answer', js: true do
     sign_in(new_user)
 
     visit question_path(question)
+
     click_link('Edit')
-    fill_in('Your answer', with: 'My New Answer')
+    fill_in('My Answer', with: 'My New Answer')
     click_button 'Edit'
 
     expect(current_path).to eq question_path(question)
