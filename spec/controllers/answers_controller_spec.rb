@@ -8,6 +8,9 @@ RSpec.describe AnswersController, type: :controller do
   let(:user) { create(:user, email: 'test@test.io') }
   let!(:other_answer) { create(:answer, user: user, question: question) }
 
+  let(:new_question) { create(:question, user: user) }
+  let!(:new_answer) { create(:answer, user: user, question: new_question) }
+
   describe 'POST #create' do
     context 'correct work' do
       it 'create object' do
@@ -69,6 +72,13 @@ RSpec.describe AnswersController, type: :controller do
       put :best, question_id: question, id: answer, format: :js
       answer.reload
       expect(answer.flag).to be true
+    end
+
+    it 'Not author try to choose best answer' do
+      expect(new_answer.flag).to be false
+      put :best, question_id: new_question, id: new_answer, format: :js
+      answer.reload
+      expect(new_answer.flag).to be false
     end
   end
 end

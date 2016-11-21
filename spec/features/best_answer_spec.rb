@@ -7,9 +7,8 @@ feature 'User edit answer', '
   given(:user) { create(:user) }
   given(:new_user) { create(:user) }
   given(:question) { create(:question, user: user) }
-  given!(:answer) { create(:answer, user: user, question: question, body: '1') }
-  given!(:answer_2) { create(:answer, user: new_user, question: question, body: '2') }
-  given!(:answer_3) { create(:answer, user: new_user, question: question, body: '3') }
+  given!(:answer) { create(:answer, user: user, question: question, body: 'My Answer 1') }
+  given!(:answer_2) { create(:answer, user: new_user, question: question, body: 'My Answer 2') }
 
   scenario 'Not registrated user try to choose best answer' do
     visit question_path(question)
@@ -32,11 +31,13 @@ feature 'User edit answer', '
 
     visit question_path(question)
 
-    within "#answer_#{answer_3.id}" do
+    within "#answer_#{answer_2.id}" do
       click_link('Best')
     end
 
     expect(current_path).to eq question_path(question)
-    # I don't know how to check that answer replace his position on page?
+    within ".answers > div:first-child" do
+      expect(page).to have_content "My Answer 2"
+    end
   end
 end
