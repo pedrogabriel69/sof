@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe AnswersController, type: :controller do
   sign_in_user
   let(:question) { create(:question, user: @user) }
-  let(:answer) { create(:answer, user: @user, question: question) }
+  let(:answer) { create(:answer, user: @user, question: question, flag: false) }
 
   let(:user) { create(:user, email: 'test@test.io') }
   let!(:other_answer) { create(:answer, user: user, question: question) }
@@ -60,6 +60,15 @@ RSpec.describe AnswersController, type: :controller do
 
     it 'user tries destroy not own answer' do
       expect { delete :destroy, params: { question_id: question, id: other_answer, format: :js } }.to_not change(Answer, :count)
+    end
+  end
+
+  describe 'BEST #PUT' do
+    it 'choose best answer' do
+      expect(answer.flag).to be false
+      put :best, question_id: question, id: answer, format: :js
+      answer.reload
+      expect(answer.flag).to be true
     end
   end
 end
