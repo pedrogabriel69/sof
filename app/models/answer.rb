@@ -4,7 +4,8 @@ class Answer < ApplicationRecord
 
   validates :body, presence: true
 
-  scope :ordered, -> { order(flag: :desc) }
+  # scope :ordered, -> { order(flag: :desc).order(:created_at) }
+  scope :ordered, -> { order('flag DESC, created_at') }
 
   def choose_answer(question)
     # can you check it please?

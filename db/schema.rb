@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20161119145053) do
     t.datetime "updated_at",                  null: false
     t.integer  "question_id"
     t.integer  "user_id"
-    t.boolean  "flag",        default: false
+    t.boolean  "flag",        default: false, null: false
     t.index ["question_id"], name: "index_answers_on_question_id", using: :btree
     t.index ["user_id"], name: "index_answers_on_user_id", using: :btree
   end
