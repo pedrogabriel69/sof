@@ -17,6 +17,7 @@ gem 'devise'
 gem 'devise-bootstrap-views'
 gem 'simple_form'
 gem 'jquery-turbolinks'
+gem 'carrierwave'
 
 group :development, :test do
   gem 'byebug', platform: :mri
