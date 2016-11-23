@@ -14,10 +14,10 @@ feature 'Add files to question', '
   scenario 'User try to add file to question' do
     fill_in('Title', with: 'Test question')
     fill_in('Your question', with: 'body text')
-    
+
     attach_file("File", "#{Rails.root}/spec/spec_helper.rb")
     click_button 'Save'
 
-    expect(page).to have_content 'spec_helper.rb'
+    expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
   end
 end
