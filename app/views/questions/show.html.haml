@@ -7,6 +7,12 @@
           = @question.user.name
           %p= @question.title
         = @question.body
+        %p
+          %strong Attachments:
+        %ul
+          - @question.attachments.each do |a|
+            %li= a.file.file.filename
+
         = render 'links', question: @question
 
         - if @question.answers.present?

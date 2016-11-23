@@ -9,6 +9,8 @@
     .form-group
       = f.input :title, label: false, placeholder: 'Title', input_html: { value: "#{@question.new_record? ? '' : @question.title}" }, hint: 'Can\'t be empty'
       = f.input :body, label: false, placeholder: 'Your question', input_html: { value: "#{@question.new_record? ? '' : @question.body}" }, hint: 'Can\'t be empty'
+      = f.simple_fields_for :attachments do |a|
+        = a.file_field :file
       .modal-footer
         = button_to 'Cancel', '#', class: 'btn btn-default btn-sm', data: { dismiss: 'modal' }
         = f.submit  "#{@question.new_record? ? 'Save' : 'Edit'}", class: "btn btn-primary btn-sm"
