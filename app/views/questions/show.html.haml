@@ -26,4 +26,6 @@
             = simple_form_for([@question, @answer], remote: true, html: { role: "form" }) do |f|
               .answer_errors
               = f.input :body, label: false, placeholder: 'Your answer'
+              = f.simple_fields_for :attachments do |a|
+                = a.input :file, as: :file
               = f.submit "Save", class: "btn btn-primary btn-sm"

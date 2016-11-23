@@ -18,6 +18,7 @@ gem 'devise-bootstrap-views'
 gem 'simple_form'
 gem 'jquery-turbolinks'
 gem 'carrierwave'
+gem 'remotipart', '~> 1.3'
 
 group :development, :test do
   gem 'byebug', platform: :mri

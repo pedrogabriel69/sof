@@ -5,6 +5,11 @@
     = "added #{time_ago_in_words answer.created_at} ago"
   %br
   = answer.body
+  %p
+    %strong Attachments:
+  %ul
+    - answer.attachments.each do |a|
+      %li= link_to a.file.identifier, a.file.url
   .col-md-offset-10.col-md-3
     - if user_signed_in? && current_user.author?(@question)
       = best_btn(@question, answer)
