@@ -27,5 +27,7 @@
               .answer_errors
               = f.input :body, label: false, placeholder: 'Your answer'
               = f.simple_fields_for :attachments do |a|
-                = a.input :file, as: :file
+                = render 'attachment_fields', f: a
+              .links
+                = link_to_add_association 'add file', f, :attachments
               = f.submit "Save", class: "btn btn-primary btn-sm"
