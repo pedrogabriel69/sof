@@ -12,7 +12,7 @@
       = f.simple_fields_for :attachments do |a|
         = render 'attachment_fields', f: a
       .links
-        = link_to_add_association 'add file', f, :attachments
+        = link_to_add_association 'Attach file', f, :attachments
       .modal-footer
         = button_to 'Cancel', '#', class: 'btn btn-default btn-sm', data: { dismiss: 'modal' }
         = f.submit  "#{@question.new_record? ? 'Save' : 'Edit'}", class: "btn btn-primary btn-sm"
