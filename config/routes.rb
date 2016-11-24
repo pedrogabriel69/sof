@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root 'questions#index'
 
-  # put '/questions/:question_id/answers/:id/best', to 'answers#best'
+  resources :attachments, only: :destroy
 
   resources :questions do
     resources :answers do
