@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     resources :answers do
       member do
         put :best
+        get :like
+        get :unlike
       end
     end
   end

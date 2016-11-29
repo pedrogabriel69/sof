@@ -1,16 +1,7 @@
 .container
   .row
     = render 'buttons'
-    .col-xs-1.questions
-      %br
-      %br
-      %br
-      %br
-      - if user_signed_in?
-        = link_to '', like_question_path(@question), remote: true, class: "glyphicon glyphicon-triangle-top votes", data: { type: :json }
-        .rating
-          = @question.votes_for.up.size - @question.votes_for.down.size
-        = link_to '', unlike_question_path(@question), remote: true, class: "glyphicon glyphicon-triangle-bottom votes", data: { type: :json }
+    = render 'common/rating_question', resource: @question
     .col-md-11
       %div
         %h3

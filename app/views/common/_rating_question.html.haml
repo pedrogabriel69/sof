@@ -1,0 +1,10 @@
+.col-xs-1.questions
+  %br
+  %br
+  %br
+  %br
+  - if user_signed_in?
+    = link_to '', like_question_path(resource), remote: true, class: "glyphicon glyphicon-triangle-top votes", data: { type: :json }
+    .rating
+      = resource.votes_for.up.size - resource.votes_for.down.size
+    = link_to '', unlike_question_path(resource), remote: true, class: "glyphicon glyphicon-triangle-bottom votes", data: { type: :json }

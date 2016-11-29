@@ -1,4 +1,5 @@
 %div{id: "answer_#{answer.id}"}
+  = render 'common/rating_answers', resource: answer
   %br/
   %strong
     = answer.user.name

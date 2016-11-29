@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_answer, only: [:update, :destroy, :best]
-  before_action :set_question, only: [:create, :destroy, :best]
+  before_action :set_question, only: [:create, :destroy, :best, :like, :unlike]
+  before_action :set_answer, only: [:update, :destroy, :best, :like, :unlike]
 
   def create
     @answer = @question.answers.build(answer_params.merge(user_id: current_user.id))
@@ -19,6 +19,16 @@ class AnswersController < ApplicationController
 
   def best
     flash[:notice] = 'Your choose best answer.' if @answer.choose_answer(@question)
+  end
+
+  def like
+    @answer.liked_by current_user if !(current_user.author?(@answer))
+    # render json: @question
+  end
+
+  def unlike
+    @answer.downvote_from current_user if !(current_user.author?(@answer))
+    # render json: @question
   end
 
   private
