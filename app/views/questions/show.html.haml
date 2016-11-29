@@ -1,7 +1,17 @@
 .container
   .row
     = render 'buttons'
-    .col-md-offset-1.col-md-10.col-md-offset-1
+    .col-xs-1.questions
+      %br
+      %br
+      %br
+      %br
+      - if user_signed_in?
+        = link_to '', like_question_path(@question), remote: true, class: "glyphicon glyphicon-triangle-top votes", data: { type: :json }
+        .rating
+          = @question.votes_for.up.size - @question.votes_for.down.size
+        = link_to '', unlike_question_path(@question), remote: true, class: "glyphicon glyphicon-triangle-bottom votes", data: { type: :json }
+    .col-md-11
       %div
         %h3
           = @question.user.name
@@ -26,7 +36,7 @@
 
         - if user_signed_in?
           .new_answer_form
-            = simple_form_for([@question, @answer], remote: true, html: { role: "form" }) do |f|
+            = simple_form_for([@question, @answer], remote: true) do |f|
               .answer_errors
               = f.input :body, label: false, placeholder: 'Your answer'
               = f.simple_fields_for :attachments do |a|

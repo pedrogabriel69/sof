@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_question, only: [:show, :edit, :update, :destroy, :like, :unlike]
 
   def index
     @questions = Question.all.order('created_at DESC')
@@ -46,6 +46,16 @@ class QuestionsController < ApplicationController
       @question.destroy
       redirect_to questions_path
     end
+  end
+
+  def like
+    @question.liked_by current_user if !(current_user.author?(@question))
+    # render json: @question
+  end
+
+  def unlike
+    @question.downvote_from current_user if !(current_user.author?(@question))
+    # render json: @question
   end
 
   private

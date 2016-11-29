@@ -18,7 +18,7 @@
       = best_btn(@question, answer)
     - if user_signed_in? && current_user.author?(answer)
       = link_to 'Edit', '', class: "btn btn-warning btn-xs edit-answer-link", data: { answer_id: answer.id }
-      = link_to 'Delete', [@question, answer], method: :delete, remote: true, :class => "btn btn-danger btn-xs"
+      = link_to 'Delete', [@question, answer], method: :delete, remote: true, class: "btn btn-danger btn-xs"
 
   = simple_form_for([@question, answer], remote: true, html: { id: "edit-answer-#{answer.id}" }) do |f|
     .answer_errors
