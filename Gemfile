@@ -20,7 +20,6 @@ gem 'jquery-turbolinks'
 gem 'carrierwave'
 gem 'remotipart', '~> 1.3'
 gem 'cocoon'
-gem 'acts_as_votable', '~> 0.10.0'
 
 group :development, :test do
   gem 'byebug', platform: :mri
