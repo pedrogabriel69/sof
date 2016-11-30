@@ -7,7 +7,6 @@ module Votable
     belongs_to :user
 
     accepts_nested_attributes_for :attachments, reject_if: :all_blank, allow_destroy: true
-    accepts_nested_attributes_for :votes
   end
 
   def liked_by(user)
