@@ -6,5 +6,5 @@
   - if user_signed_in?
     = link_to '', like_question_path(resource), remote: true, class: "glyphicon glyphicon-triangle-top votes", data: { type: :json }
     .rating
-      = resource.votes_for_up - resource.votes_for_down
+      = resource.rating
     = link_to '', unlike_question_path(resource), remote: true, class: "glyphicon glyphicon-triangle-bottom votes", data: { type: :json }

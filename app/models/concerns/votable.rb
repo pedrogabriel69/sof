@@ -11,38 +11,34 @@ module Votable
   end
 
   def liked_by(user)
-    vote = votes.where(user_id: user.id).first
+    vote = votes.find_by(user_id: user.id)
     if vote
-      update_vote_for(vote) if vote.choice == false
+      update_vote_for(vote, 1) if !vote.choice
     else
-      votes.create(user: user, choice: true)
+      votes.create(user: user, choice: true, weight: 1)
     end
   end
 
   def downvote_from(user)
-    vote = votes.where(user_id: user.id).first
+    vote = votes.find_by(user_id: user.id)
     if vote
-      update_vote_against(vote) if vote.choice == true
+      update_vote_against(vote, -1) if vote.choice
     else
-      votes.create(user: user, choice: false)
+      votes.create(user: user, choice: false, weight: -1)
     end
   end
 
-  def votes_for_up
-    votes.where(choice: true).size
-  end
-
-  def votes_for_down
-    votes.where(choice: false).size
+  def rating
+    votes.sum(:weight)
   end
 
   private
 
-  def update_vote_for(vote)
-    vote.update(choice: true)
+  def update_vote_for(vote, val)
+    vote.update(choice: true, weight: val)
   end
 
-  def update_vote_against(vote)
-    vote.update(choice: false)
+  def update_vote_against(vote, val)
+    vote.update(choice: false, weight: val)
   end
 end
