@@ -1,4 +1,6 @@
 class AnswersController < ApplicationController
+  include Voted
+
   before_action :authenticate_user!
   before_action :set_question, only: [:create, :destroy, :best, :like, :unlike]
   before_action :set_answer, only: [:update, :destroy, :best, :like, :unlike]
@@ -19,16 +21,6 @@ class AnswersController < ApplicationController
 
   def best
     flash[:notice] = 'Your choose best answer.' if @answer.choose_answer(@question)
-  end
-
-  def like
-    @answer.liked_by current_user if !(current_user.author?(@answer))
-    # render json: @question
-  end
-
-  def unlike
-    @answer.downvote_from current_user if !(current_user.author?(@answer))
-    # render json: @question
   end
 
   private
