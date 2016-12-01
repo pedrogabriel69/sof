@@ -1,0 +1,50 @@
+require 'rails_helper'
+
+RSpec.shared_examples "votable" do
+  it { should belong_to :user }
+  it { should have_many(:attachments).dependent(:destroy) }
+  it { should have_many(:votes).dependent(:destroy) }
+  it { should accept_nested_attributes_for :attachments }
+
+  context '#liked_by' do
+    let(:model) { described_class }
+    let(:user) { create(:user) }
+    let(:votable) { create(model.to_s.underscore.to_sym, user: user) }
+
+    it 'update' do
+      vote = votable.votes.create(user: user, choice: false, weight: -1)
+      votable.liked_by(user)
+      vote.reload
+      expect(vote.choice).to eq true
+      expect(vote.weight).to eq 1
+    end
+
+    it 'create' do
+      votable.liked_by(user)
+      vote = votable.votes.find_by(user_id: user.id)
+      expect(vote.choice).to eq true
+      expect(vote.weight).to eq 1
+    end
+  end
+
+  context '#downvote_from' do
+    let(:model) { described_class }
+    let(:user) { create(:user) }
+    let(:votable) { create(model.to_s.underscore.to_sym, user: user) }
+
+    it 'update' do
+      vote = votable.votes.create(user: user, choice: true, weight: 1)
+      votable.downvote_from(user)
+      vote.reload
+      expect(vote.choice).to eq false
+      expect(vote.weight).to eq -1
+    end
+
+    it 'create' do
+      votable.downvote_from(user)
+      vote = votable.votes.find_by(user_id: user.id)
+      expect(vote.choice).to eq false
+      expect(vote.weight).to eq -1
+    end
+  end
+end
