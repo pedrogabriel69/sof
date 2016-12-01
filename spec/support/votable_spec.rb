@@ -7,9 +7,7 @@ RSpec.shared_examples "votable" do
   it { should accept_nested_attributes_for :attachments }
 
   context '#liked_by' do
-    let(:model) { described_class }
     let(:user) { create(:user) }
-    let(:votable) { create(model.to_s.underscore.to_sym, user: user) }
 
     it 'update' do
       vote = votable.votes.create(user: user, choice: false, weight: -1)
@@ -28,9 +26,7 @@ RSpec.shared_examples "votable" do
   end
 
   context '#downvote_from' do
-    let(:model) { described_class }
     let(:user) { create(:user) }
-    let(:votable) { create(model.to_s.underscore.to_sym, user: user) }
 
     it 'update' do
       vote = votable.votes.create(user: user, choice: true, weight: 1)
