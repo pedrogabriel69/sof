@@ -6,11 +6,11 @@ module Voted
   end
 
   def like
-    instance_variable_set("@#{controller_name.singularize}", @votable).liked_by current_user if !(current_user.author?(instance_variable_set("@#{controller_name.singularize}", @votable)))
+    @votable.liked_by current_user if !(current_user.author?(@votable))
   end
 
   def unlike
-    instance_variable_set("@#{controller_name.singularize}", @votable).downvote_from current_user if !(current_user.author?(instance_variable_set("@#{controller_name.singularize}", @votable)))
+    @votable.downvote_from current_user if !(current_user.author?(@votable))
   end
 
   private
