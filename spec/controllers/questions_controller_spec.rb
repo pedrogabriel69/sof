@@ -1,7 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
+  it_behaves_like "voted" do
+    let(:votable) { create(:question, user: user) }
+    let(:params_votable) { { id: votable } }
+  end
+
   sign_in_user
+
   let(:question) { create(:question, title: 'Question title', body: 'Question body', user: @user) }
 
   let(:user) { create(:user, email: 'test@test.io') }

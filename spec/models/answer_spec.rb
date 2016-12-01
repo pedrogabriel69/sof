@@ -1,12 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Answer, type: :model do
-  describe Answer do
-    it_behaves_like "votable" do
-      let(:question) { create(:question, user: user) }
-      let(:votable) { create(:answer, question: question, user: user) }
-    end
+  it_behaves_like "votable" do
+    let(:question) { create(:question, user: user) }
+    let(:votable) { create(:answer, question: question, user: user) }
   end
+
 
   it { should validate_presence_of :body }
   it { should belong_to :question }
