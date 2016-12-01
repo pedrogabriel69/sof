@@ -12,7 +12,7 @@ module Votable
   def liked_by(user)
     vote = votes.find_by(user_id: user.id)
     if vote
-      update_vote_for(vote, 1) if !vote.choice
+      update_vote_for(vote, 1) unless vote.choice
     else
       votes.create(user: user, choice: true, weight: 1)
     end

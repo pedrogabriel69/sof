@@ -6,11 +6,11 @@ module Voted
   end
 
   def like
-    @votable.liked_by current_user if !(current_user.author?(@votable))
+    @votable.liked_by current_user unless current_user.author?(@votable)
   end
 
   def unlike
-    @votable.downvote_from current_user if !(current_user.author?(@votable))
+    @votable.downvote_from current_user unless current_user.author?(@votable)
   end
 
   private
