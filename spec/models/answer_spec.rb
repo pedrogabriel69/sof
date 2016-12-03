@@ -1,12 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Answer, type: :model do
+  it_behaves_like "votable" do
+    let(:question) { create(:question, user: user) }
+    let(:votable) { create(:answer, question: question, user: user) }
+  end
+
+
   it { should validate_presence_of :body }
   it { should belong_to :question }
-  it { should belong_to :user }
-  it { should have_many(:attachments).dependent(:destroy) }
-
-  it { should accept_nested_attributes_for :attachments }
 
   describe '#choose_answer' do
     let(:user) { create(:user) }

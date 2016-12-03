@@ -1,7 +1,8 @@
 .container
   .row
     = render 'buttons'
-    .col-md-offset-1.col-md-10.col-md-offset-1
+    = render 'common/rating_question', resource: @question
+    .col-md-11
       %div
         %h3
           = @question.user.name
@@ -26,7 +27,7 @@
 
         - if user_signed_in?
           .new_answer_form
-            = simple_form_for([@question, @answer], remote: true, html: { role: "form" }) do |f|
+            = simple_form_for([@question, @answer], remote: true) do |f|
               .answer_errors
               = f.input :body, label: false, placeholder: 'Your answer'
               = f.simple_fields_for :attachments do |a|

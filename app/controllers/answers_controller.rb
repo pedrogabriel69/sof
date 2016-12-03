@@ -1,7 +1,9 @@
 class AnswersController < ApplicationController
+  include Voted
+
   before_action :authenticate_user!
-  before_action :set_answer, only: [:update, :destroy, :best]
   before_action :set_question, only: [:create, :destroy, :best]
+  before_action :set_answer, only: [:update, :destroy, :best]
 
   def create
     @answer = @question.answers.build(answer_params.merge(user_id: current_user.id))

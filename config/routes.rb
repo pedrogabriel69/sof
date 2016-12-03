@@ -5,8 +5,15 @@ Rails.application.routes.draw do
 
   resources :attachments, only: :destroy
 
-  resources :questions do
-    resources :answers do
+  concern :votable do
+    member do
+      get :like
+      get :unlike
+    end
+  end
+
+  resources :questions, concerns: [:votable] do
+    resources :answers, concerns: [:votable] do
       member do
         put :best
       end
