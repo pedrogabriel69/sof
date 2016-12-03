@@ -12,18 +12,18 @@ module Votable
   def liked_by(user)
     vote = votes.find_by(user_id: user.id)
     if vote
-      update_vote_for(vote, 1) unless vote.choice
+      update_vote_for(vote, 1) if vote.weight == -1
     else
-      votes.create(user: user, choice: true, weight: 1)
+      votes.create(user: user, weight: 1)
     end
   end
 
   def downvote_from(user)
     vote = votes.find_by(user_id: user.id)
     if vote
-      update_vote_against(vote, -1) if vote.choice
+      update_vote_against(vote, -1) if vote.weight == 1
     else
-      votes.create(user: user, choice: false, weight: -1)
+      votes.create(user: user, weight: -1)
     end
   end
 
@@ -34,10 +34,10 @@ module Votable
   private
 
   def update_vote_for(vote, val)
-    vote.update(choice: true, weight: val)
+    vote.update(weight: val)
   end
 
   def update_vote_against(vote, val)
-    vote.update(choice: false, weight: val)
+    vote.update(weight: val)
   end
 end

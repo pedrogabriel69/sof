@@ -4,6 +4,5 @@ class Vote < ApplicationRecord
 
   validates :votable_type, inclusion: ['Question', 'Answer']
   validates :weight, inclusion: [-1, 1]
-  validates :choice, inclusion: [false, true]
   validates :user_id, uniqueness: { scope: [:votable_type, :votable_id] }
 end

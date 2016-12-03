@@ -68,7 +68,6 @@ ActiveRecord::Schema.define(version: 20161130164343) do
     t.integer  "votable_id"
     t.string   "votable_type"
     t.integer  "user_id"
-    t.boolean  "choice"
     t.integer  "weight"
     t.index ["user_id"], name: "index_votes_on_user_id", using: :btree
     t.index ["votable_id", "votable_type"], name: "index_votes_on_votable_id_and_votable_type", using: :btree
