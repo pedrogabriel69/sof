@@ -33,8 +33,10 @@ feature 'User edit answer', '
     visit question_path(question)
 
     click_link('Edit')
-    fill_in('My Answer', with: 'My New Answer')
-    click_button 'Edit'
+    within '.edit_answer' do
+      fill_in('Your answer', with: 'My New Answer')
+      click_button 'Edit'
+    end
 
     expect(current_path).to eq question_path(question)
     within '.answers' do
@@ -44,13 +46,15 @@ feature 'User edit answer', '
     end
   end
 
-  scenario 'User try to edit invalid answer' do
+  scenario 'User try to edit invalid answer', js: true do
     sign_in(new_user)
 
     visit question_path(question)
     click_link('Edit')
-    fill_in('Your answer', with: '')
-    click_button 'Edit'
+    within '.edit_answer' do
+      fill_in('Your answer', with: '')
+      click_button 'Edit'
+    end
 
     expect(page).to have_content "Body can't be blank"
   end

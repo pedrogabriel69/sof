@@ -14,7 +14,7 @@ feature 'Add files to answer', '
 
   scenario 'User try to add file to answer', js: true do
     fill_in('Your answer', with: 'My Answer')
-
+    click_on 'Attach file'
     attach_file("File", "#{Rails.root}/spec/spec_helper.rb")
     click_button 'Save'
     within '.answers' do
