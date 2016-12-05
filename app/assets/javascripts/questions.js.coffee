@@ -12,7 +12,7 @@ ready = ->
     received: (data) ->
       console.log 'Received!', data
       question = $.parseJSON(data)
-      $('.list-questions').append question.body
+      $('.list-questions').append(JST["question"]({question: question}));
   })
 
 
