@@ -20,6 +20,8 @@ gem 'jquery-turbolinks'
 gem 'carrierwave'
 gem 'remotipart', '~> 1.3'
 gem 'cocoon'
+gem 'skim'
+gem 'sprockets', '3.6.3'
 
 group :development, :test do
   gem 'byebug', platform: :mri
