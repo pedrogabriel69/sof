@@ -2,7 +2,7 @@
   .row
     = render 'buttons'
     .col-md-offset-1.col-md-10.col-md-offset-1
-      %ul
+      .list-questions
         - @questions.each do |question|
           %h3= link_to "#{question.title}", question
           %br/

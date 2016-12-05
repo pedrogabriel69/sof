@@ -15,4 +15,4 @@
         = link_to_add_association 'Attach file', f, :attachments
       .modal-footer
         = button_to 'Cancel', '#', class: 'btn btn-default btn-sm', data: { dismiss: 'modal' }
-        = f.submit  "#{@question.new_record? ? 'Save' : 'Edit'}", class: "btn btn-primary btn-sm"
+        = f.submit  "#{@question.new_record? ? 'Save' : 'Edit'}", class: "btn btn-primary btn-sm create-question"
