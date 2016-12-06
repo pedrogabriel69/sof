@@ -17,10 +17,11 @@ ready = ->
     received: (data) ->
       console.log 'Received!', data
       answer = $.parseJSON(data)
+      question = answer.question
       console.log('User Id:', gon.user_id)
       console.log('Answer Id:', answer.id)
       return if $("#answer_#{answer.id}")[0]?
-      $('#answer_question_' + answer.question_id).append(JST["answer"]({answer: answer}));
+      $('#answer_question_' + answer.question_id).append(JST["answer"]({answer: answer, question: question}));
   })
 
 $(document).ready(ready)
