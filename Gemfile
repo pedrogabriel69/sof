@@ -21,6 +21,7 @@ gem 'carrierwave'
 gem 'remotipart', '~> 1.3'
 gem 'cocoon'
 gem 'skim'
+gem 'gon'
 gem 'sprockets', '3.6.3'
 
 group :development, :test do

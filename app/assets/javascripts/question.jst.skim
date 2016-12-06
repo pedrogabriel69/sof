@@ -2,3 +2,7 @@ h3
   a href="/questions/#{@question.id}"
     | #{@question.body}
 = @question.body
+.col-md-offset-10.col-md-2
+  - if gon.user_id == @question.user_id
+    a.btn.btn-warning.btn-xs href="#" Edit
+    a.btn.btn-danger.btn-xs data-method="delete" href="#" Delete
