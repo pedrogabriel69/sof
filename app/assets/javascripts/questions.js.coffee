@@ -5,7 +5,7 @@ ready = ->
 
   App.cable.subscriptions.create('QuestionsChannel', {
     connected: ->
-      console.log 'Connected!'
+      console.log 'Connected to QuestionsChannel'
       # @perform 'echo', text: 'hello'
       @perform 'follow'
 

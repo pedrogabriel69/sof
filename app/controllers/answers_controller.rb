@@ -5,6 +5,8 @@ class AnswersController < ApplicationController
   before_action :set_question, only: [:create, :destroy, :best]
   before_action :set_answer, only: [:update, :destroy, :best]
 
+  after_action :publish_answer, only: [:create]
+
   def create
     @answer = @question.answers.build(answer_params.merge(user_id: current_user.id))
     flash[:notice] = 'Your answer successfully created.' if @answer.save
@@ -31,6 +33,14 @@ class AnswersController < ApplicationController
 
   def set_question
     @question = Question.find(params[:question_id])
+  end
+
+  def publish_answer
+    return if @answer.errors.any?
+    ActionCable.server.broadcast(
+      'answers',
+      render_to_string(template: 'answers/answer.json.jbuilder')
+    )
   end
 
   def answer_params
