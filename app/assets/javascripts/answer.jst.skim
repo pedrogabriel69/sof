@@ -1,0 +1,25 @@
+div id="answer_#{@answer.id}"
+  strong
+    = @answer.user.name
+  br
+  = @answer.body
+  p
+    strong Attachments:
+  - for attach in @answer.attachments
+    div id="attachment_#{attach.id}"
+      a[href="#{attach.file_url}"]
+        | #{attach.file_name}
+      a data-type="json" data-method="delete" data-remote="true" href="/attachments/#{attach.id}" delete
+
+  .col-md-offset-10.col-md-3
+    p
+      a.btn.btn-default.btn-xs href="#" Best
+      a.btn.btn-warning.btn-xs.edit-answer-link data-answer-id="#{@answer.id}" href="#"  Edit
+      a.btn.btn-danger.btn-xs.destroy-answer-link data-type="json" data-method="delete" data-remote="true" href="#{@answer.destroy_url}" Delete
+
+  form.simple_form.edit_answer data-remote="true" method="post" style="display: none;" id="edit-answer-#{@answer.id}"
+    .answer_errors
+    .form-group.text.required.answer_body
+      textarea#answer_body.form-control.text.required placeholder="Your answer" name="answer[body]"
+        | #{@answer.body}
+    input.btn.btn-primary.btn-sm type="submit" name="commit" value="Edit" data-disable-with="Edit"

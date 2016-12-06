@@ -22,8 +22,9 @@
         - if @question.answers.present?
           %h3
             = "#{@question.answers.count} Answers"
-        .answers
-          = render 'questions/answers'
+        %div{id: "answer_question_#{@question.id}"}
+          .answers
+            = render 'questions/answers'
 
         - if user_signed_in?
           .new_answer_form
