@@ -6,17 +6,16 @@ ready = ->
   App.cable.subscriptions.create('QuestionsChannel', {
     connected: ->
       console.log 'Connected to QuestionsChannel'
-      # @perform 'echo', text: 'hello'
       @perform 'follow'
 
     received: (data) ->
       console.log 'Received!', data
       question = $.parseJSON(data)
-      console.log(gon.user_id)
+      console.log('User Id:', gon.user_id)
       $('.list-questions').append(JST["question"]({question: question}));
   })
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
 $(document).on('page:update', ready)
-$(document).on("turbolinks:load", ready)
+# $(document).on("turbolinks:load", ready)
