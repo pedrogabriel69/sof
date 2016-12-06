@@ -12,9 +12,9 @@ ready = ->
     received: (data) ->
       console.log 'Received!', data
       question = $.parseJSON(data)
+      console.log(gon.user_id)
       $('.list-questions').append(JST["question"]({question: question}));
   })
-
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
