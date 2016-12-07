@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  include Contexted
+  include Commented
 
   before_action :set_commented, only: [:create]
 

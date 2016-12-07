@@ -2,7 +2,7 @@
   .row
     = render 'buttons'
     = render 'common/rating_question', resource: @question
-    .col-md-11
+    .col-md-11.question
       %div
         %h3
           = @question.user.name
@@ -17,7 +17,13 @@
               = link_to 'delete', a, method: :delete, remote: true
               %br
 
-        = render 'links', question: @question
+        = render 'links_comment', question: @question
+        = render 'comments/question_comment_form'
+
+        - if @question.comments.present?
+          .comments
+            - @question.comments.ordered_comment.each do |comment|
+              = render 'comments/question_comment', comment: comment
 
         - if @question.answers.present?
           %h3
