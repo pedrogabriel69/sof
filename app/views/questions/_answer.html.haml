@@ -14,12 +14,23 @@
       - if user_signed_in? && current_user.author?(answer)
         = link_to 'delete', a, method: :delete, remote: true
         %br
-  .col-md-offset-10.col-md-3
+  .col-md-offset-9.col-md-3
+    - if user_signed_in?
+      = link_to 'Comment', '', class: "btn btn-default btn-xs answer-comment-link", data: { answer_id: answer.id }
     - if user_signed_in? && current_user.author?(@question)
       = best_btn(@question, answer)
     - if user_signed_in? && current_user.author?(answer)
       = link_to 'Edit', '', class: "btn btn-warning btn-xs edit-answer-link", data: { answer_id: answer.id }
       = link_to 'Delete', [@question, answer], method: :delete, remote: true, class: "btn btn-danger btn-xs"
+
+  = render 'comments/answer_comment_form', answer: answer
+
+  - if answer.comments.present?
+    %h6
+      = "#{answer.comments.count} Comments"
+  %div{id: "comment_#{answer.id}"}
+    - answer.comments.ordered_comment.each do |comment|
+      = render 'comments/comment', comment: comment
 
   = simple_form_for([@question, answer], remote: true, html: { id: "edit-answer-#{answer.id}" }) do |f|
     .answer_errors

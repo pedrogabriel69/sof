@@ -8,6 +8,7 @@ class AnswersController < ApplicationController
   after_action :publish_answer, only: [:create]
 
   def create
+    @comment = Comment.new
     @answer = @question.answers.build(answer_params.merge(user_id: current_user.id))
     flash[:notice] = 'Your answer successfully created.' if @answer.save
   end

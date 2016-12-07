@@ -2,9 +2,9 @@
   .row
     = render 'buttons'
     = render 'common/rating_question', resource: @question
-    .col-md-11.question
+    .col-md-10.question
       %div
-        %h3
+        %h4
           = @question.user.name
           %p= @question.title
         = @question.body
@@ -21,12 +21,14 @@
         = render 'comments/question_comment_form'
 
         - if @question.comments.present?
-          .comments
-            - @question.comments.ordered_comment.each do |comment|
-              = render 'comments/question_comment', comment: comment
+          %h6
+            = "#{@question.comments.count} Comments"
+        .comments
+          - @question.comments.ordered_comment.each do |comment|
+            = render 'comments/comment', comment: comment
 
         - if @question.answers.present?
-          %h3
+          %h4
             = "#{@question.answers.count} Answers"
         %div{id: "answer_question_#{@question.id}"}
           .answers
