@@ -1,0 +1,12 @@
+<% if @comment.valid? %>
+  <% if @comment.commentable_type == 'Question' %>
+    $('.comments').append("<%= j render 'comments/question_comment', comment: @comment %>");
+    $('#comment_body').val('');
+  <% end %>
+  // <% if @comment.commentable_type == 'Answer' %>
+  //   $('.comments').append("<%= j render 'comments/question_comment', comment: @comment %>");
+  //   $('#comment_body').val('');
+  // <% end %>
+<% else %>
+    $('.comment_errors').html("<%= j render 'common/errors', resource: @comment %>");
+<% end %>

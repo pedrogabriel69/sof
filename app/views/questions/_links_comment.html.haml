@@ -1,4 +1,6 @@
 .col-md-offset-10.col-md-3
+  - if user_signed_in?
+    = link_to 'Comment', '', class: "btn btn-default btn-xs question-comment-link"
   - if user_signed_in? && current_user.author?(question)
     = link_to 'Edit', edit_question_path(question), class: "btn btn-warning btn-xs", "data-target": "#edit_modal", "data-toggle": "modal"
     #edit_modal.modal.fade
