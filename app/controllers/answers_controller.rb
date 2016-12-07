@@ -23,6 +23,7 @@ class AnswersController < ApplicationController
   end
 
   def best
+    @comment = Comment.new
     flash[:notice] = 'Your choose best answer.' if @answer.choose_answer(@question)
   end
 
