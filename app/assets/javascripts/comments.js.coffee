@@ -12,8 +12,7 @@ ready = ->
 
   App.cable.subscriptions.create({ channel: 'CommentsChannel', id: gon.question_id }, {
     connected: ->
-      console.log 'Connected to CommentsChannel'
-      console.log('Question Id:', gon.question_id)
+      console.log 'Connected to CommentsChannel, question_id:', gon.question_id
       @perform 'follow_comment'
 
     received: (data) ->
