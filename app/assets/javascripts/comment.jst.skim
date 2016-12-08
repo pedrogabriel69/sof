@@ -1,0 +1,2 @@
+= "#{@comment.body} - #{@comment.user.name}, #{@comment.time_ago} ago"
+hr/
