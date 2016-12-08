@@ -9,10 +9,11 @@ ready = ->
     response = $.parseJSON(xhr.responseText)
     $('#rating_' + response.id).replaceWith(response.rating)
 
-  App.cable.subscriptions.create('AnswersChannel', {
+  App.cable.subscriptions.create({ channel: 'AnswersChannel', id: gon.question_id }, {
     connected: ->
       console.log 'Connected to AnswersChannel'
-      @perform 'follow'
+      console.log('Question Id:', gon.question_id)
+      @perform 'follow_answer'
 
     received: (data) ->
       console.log 'Received!', data
@@ -21,7 +22,7 @@ ready = ->
       console.log('User Id:', gon.user_id)
       console.log('Answer Id:', answer.id)
       return if $("#answer_#{answer.id}")[0]?
-      $('#answer_question_' + answer.question_id).append(JST["answer"]({answer: answer, question: question}));
+      $('.answers').append(JST["answer"]({answer: answer, question: question}));
   })
 
 $(document).ready(ready)

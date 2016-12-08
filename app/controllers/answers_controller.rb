@@ -40,7 +40,7 @@ class AnswersController < ApplicationController
   def publish_answer
     return if @answer.errors.any?
     ActionCable.server.broadcast(
-      'answers',
+      "answers-question-#{@answer.question.id}",
       render_to_string(template: 'answers/answer.json.jbuilder')
     )
   end

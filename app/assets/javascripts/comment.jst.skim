@@ -1,2 +1,3 @@
-= "#{@comment.body} - #{@comment.user.name}, #{@comment.time_ago} ago"
+h6
+  = "#{@comment.body} - #{@comment.user.name}, #{@comment.time_ago} ago"
 hr/
