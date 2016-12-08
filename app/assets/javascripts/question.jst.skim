@@ -4,5 +4,5 @@ h4
 = @question.body
 .col-md-offset-10.col-md-2
   - if gon.user_id == @question.user_id
-    a.btn.btn-warning.btn-xs href="#" Edit
-    a.btn.btn-danger.btn-xs data-method="delete" href="#" Delete
+    a.btn.btn-warning.btn-xs href="#{@question.edit_url}" Edit
+    a.btn.btn-danger.btn-xs data-method="delete" data-confirm="Are you sure?" href="#{@question.destroy_url}" Delete

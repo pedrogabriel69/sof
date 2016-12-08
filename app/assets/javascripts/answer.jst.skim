@@ -14,10 +14,10 @@ div id="answer_#{@answer.id}"
   .col-md-offset-10.col-md-3
     p
       - if gon.user_id == @question.user_id
-        a.btn.btn-default.btn-xs href="#" Best
+        a.btn.btn-default.btn-xs href="#{@answer.best_url}" Best
       - if gon.user_id == @answer.user_id
-        a.btn.btn-warning.btn-xs.edit-answer-link data-answer-id="#{@answer.id}" href="#"  Edit
-        a.btn.btn-danger.btn-xs.destroy-answer-link data-type="json" data-method="delete" data-remote="true" href="#{@answer.destroy_url}" Delete
+        a.btn.btn-warning.btn-xs.edit-answer-link data-answer-id="#{@answer.id}" href=""  Edit
+        a.btn.btn-danger.btn-xs.destroy-answer-link data-method="delete" data-remote="true" href="#{@answer.destroy_url}" Delete
 
   form.simple_form.edit_answer data-remote="true" method="post" style="display: none;" id="edit-answer-#{@answer.id}"
     .answer_errors
