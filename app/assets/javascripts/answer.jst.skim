@@ -13,6 +13,8 @@ div id="answer_#{@answer.id}"
 
   .col-md-offset-10.col-md-3
     p
+      - if gon.user_id
+        a.btn.btn-default.btn-xs.answer-comment-link data-answer-id="#{@answer.id}" href="" Comment
       - if gon.user_id == @question.user_id
         a.btn.btn-default.btn-xs href="#{@answer.best_url}" Best
       - if gon.user_id == @answer.user_id

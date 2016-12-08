@@ -1,6 +1,7 @@
 h4
   a href="/questions/#{@question.id}"
-    | #{@question.body}
+    | #{@question.title}
+br/
 = @question.body
 .col-md-offset-10.col-md-2
   - if gon.user_id == @question.user_id
