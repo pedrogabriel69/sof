@@ -11,8 +11,7 @@ ready = ->
 
   App.cable.subscriptions.create({ channel: 'AnswersChannel', id: gon.question_id }, {
     connected: ->
-      console.log 'Connected to AnswersChannel'
-      console.log('Question Id:', gon.question_id)
+      console.log 'Connected to AnswersChannel, question_id:', gon.question_id
       @perform 'follow_answer'
 
     received: (data) ->
