@@ -1,5 +1,5 @@
 class CommentsChannel < ApplicationCable::Channel
-  def follow
-    stream_from 'comments'
+  def follow_comment
+    stream_from "comments-question-#{params['id']}"
   end
 end

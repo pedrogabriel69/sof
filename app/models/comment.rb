@@ -5,4 +5,8 @@ class Comment < ApplicationRecord
   validates :body, presence: true
 
   scope :ordered_comment, -> { order('created_at ASC') }
+
+  def return_id
+    commentable_type == 'Question' ? commentable_id : Answer.find(commentable_id).question_id
+  end
 end

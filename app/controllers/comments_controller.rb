@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
   def publish_comment
     return if @comment.errors.any?
     ActionCable.server.broadcast(
-      'comments',
+      "comments-question-#{@comment.return_id}",
       render_to_string(template: 'comments/comment.json.jbuilder')
     )
   end
