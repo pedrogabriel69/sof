@@ -1,13 +1,12 @@
 require_relative 'features_helper'
 
-feature 'User create comment', '
-  I want to be able ask comments
+feature 'User create comment to question', '
+  I want to be able add comments to question
 ' do
 
   given(:user) { create(:user) }
   given(:guest) { create(:user) }
   given(:question) { create(:question, user: user) }
-  given(:answer) { create(:answer, user: user, question: question) }
 
   scenario 'Authenticated user creates comment to question', js: true do
     sign_in(user)
@@ -26,7 +25,7 @@ feature 'User create comment', '
     end
   end
 
-  scenario 'User try to create invalid answer', js: true do
+  scenario 'User try to create invalid comment to question', js: true do
     sign_in(user)
 
     visit question_path(question)
@@ -40,7 +39,7 @@ feature 'User create comment', '
   end
 
   context "multiple sessions, comment to question" do
-    scenario "question appears on another user's page", js: true do
+    scenario "comment appears on another user's page", js: true do
       Capybara.using_session('user') do
         sign_in(user)
         visit question_path(question)
