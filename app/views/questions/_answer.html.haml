@@ -28,7 +28,7 @@
   - if answer.comments.present?
     %h6
       = "#{answer.comments.count} Comments"
-  %div{id: "comment_#{answer.id}"}
+  %div{id: "comment_answer_#{answer.id}"}
     - answer.comments.ordered_comment.each do |comment|
       = render 'comments/comment', comment: comment
 
