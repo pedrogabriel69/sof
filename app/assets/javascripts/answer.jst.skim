@@ -1,6 +1,6 @@
 div id="answer_#{@answer.id}"
   strong
-    = @answer.user.name
+    = "#{@answer.user.name} added #{@answer.time_ago} ago"
   br
   = @answer.body
   p
