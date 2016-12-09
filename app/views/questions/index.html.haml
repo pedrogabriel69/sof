@@ -3,7 +3,7 @@
     = render 'buttons'
     .col-md-offset-1.col-md-10.col-md-offset-1
       .list-questions
-        - @questions.each do |question|
+        - @questions.ordered_question.each do |question|
           %h4= link_to "#{question.title}", question
           %br/
           = question.body

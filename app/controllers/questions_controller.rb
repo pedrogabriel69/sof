@@ -3,24 +3,19 @@ class QuestionsController < ApplicationController
 
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-
+  before_action :build_answer_comment, only: :show
   after_action :publish_question, only: [:create]
 
   def index
-    @questions = Question.all.order('created_at ASC')
-    @question = Question.new
+    respond_with(@questions = Question.all)
   end
 
   def show
-    @answer = Answer.new
-    @comment = Comment.new
-    # @answer.attachments.build
+    respond_with @question
   end
 
   def new
-    @question = Question.new
-    # @question.attachments.build
-    render :new, layout: false
+    respond_with(@question = Question.new, layout: false)
   end
 
   def edit
@@ -28,29 +23,16 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(question_params.merge(user_id: current_user.id))
-
-    if @question.save
-      flash[:notice] = 'Your question successfully created.'
-      redirect_to @question
-    else
-      flash[:notice] = 'Fail, try again.'
-    end
+    respond_with(@question = Question.create(question_params.merge(user_id: current_user.id)))
   end
 
   def update
-    if @question.update(question_params.merge(user_id: current_user.id))
-      redirect_to @question
-    else
-      render :edit
-    end
+    @question.update(question_params.merge(user_id: current_user.id))
+    respond_with @question
   end
 
   def destroy
-    if current_user.author?(@question)
-      @question.destroy
-      redirect_to questions_path
-    end
+    respond_with(@question.destroy) if current_user.author?(@question)
   end
 
   private
@@ -58,6 +40,11 @@ class QuestionsController < ApplicationController
   def set_question
     @question = Question.find(params[:id])
     gon.question_id = @question.id
+  end
+
+  def build_answer_comment
+    @answer = Answer.new
+    @comment = Comment.new
   end
 
   def publish_question
