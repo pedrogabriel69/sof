@@ -4,9 +4,10 @@ class CommentsController < ApplicationController
   before_action :set_commented, only: [:create]
   after_action :publish_comment, only: [:create]
 
+  respond_to :js
+
   def create
-    @comment = @commented.comments.build(comment_params.merge(user: current_user))
-    flash[:notice] = 'Your comment successfully created.' if @comment.save
+    respond_with(@comment = @commented.comments.create(comment_params.merge(user: current_user)))
   end
 
   private

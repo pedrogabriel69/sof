@@ -2,29 +2,28 @@ class AnswersController < ApplicationController
   include Voted
 
   before_action :authenticate_user!
-  before_action :set_question, only: [:create, :destroy, :best]
+  before_action :set_question, only: [:update, :create, :destroy, :best]
   before_action :set_answer, only: [:update, :destroy, :best]
-
+  before_action :build_comment, only: [:create, :update, :best]
   after_action :publish_answer, only: [:create]
 
+  respond_to :js
+
   def create
-    @comment = Comment.new
-    @answer = @question.answers.build(answer_params.merge(user_id: current_user.id))
-    flash[:notice] = 'Your answer successfully created.' if @answer.save
+    respond_with(@answer = @question.answers.create(answer_params.merge(user_id: current_user.id)))
   end
 
   def update
-    @question = @answer.question
-    flash[:notice] = 'Your answer successfully updated.' if @answer.update(answer_params)
+    @answer.update(answer_params)
+    respond_with @answer
   end
 
   def destroy
-    @answer.destroy if current_user.author?(@answer)
+    respond_with(@answer.destroy) if current_user.author?(@answer)
   end
 
   def best
-    @comment = Comment.new
-    flash[:notice] = 'Your choose best answer.' if @answer.choose_answer(@question)
+    respond_with(@answer) if @answer.choose_answer(@question)
   end
 
   private
@@ -35,6 +34,10 @@ class AnswersController < ApplicationController
 
   def set_question
     @question = Question.find(params[:question_id])
+  end
+
+  def build_comment
+    @comment = Comment.new
   end
 
   def publish_answer

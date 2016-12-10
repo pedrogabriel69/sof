@@ -21,7 +21,7 @@ feature 'User create comment to answer', '
     end
 
     expect(current_path).to eq question_path(question)
-    within "#comment_#{answer.id}" do
+    within "#comment_answer_#{answer.id}" do
       expect(page).to have_content 'My Comment'
     end
   end
@@ -59,7 +59,7 @@ feature 'User create comment to answer', '
         end
 
         expect(current_path).to eq question_path(question)
-        within "#comment_#{answer.id}" do
+        within "#comment_answer_#{answer.id}" do
           expect(page).to have_content 'My Comment'
         end
       end
@@ -67,7 +67,7 @@ feature 'User create comment to answer', '
       Capybara.using_session('guest') do
         visit question_path(question)
 
-        within "#comment_#{answer.id}" do
+        within "#comment_answer_#{answer.id}" do
           expect(page).to have_content 'My Comment'
         end
       end
