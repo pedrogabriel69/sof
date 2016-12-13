@@ -26,6 +26,7 @@ gem 'sprockets', '3.6.3'
 gem 'responders', '~> 2.0'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 
 
 group :development, :test do
@@ -44,6 +45,7 @@ group :development do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'letter_opener'
 end
 
 group :test do
