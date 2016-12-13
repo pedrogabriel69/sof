@@ -2,8 +2,6 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations', omniauth_callbacks: 'omniauth_callbacks' }
 
   root 'questions#index'
-  
-  resources :attachments, only: :destroy
 
   concern :votable do
     member do
@@ -12,6 +10,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :attachments, only: :destroy
   resources :questions, concerns: [:votable] do
     resources :answers, concerns: [:votable] do
       member do

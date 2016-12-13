@@ -18,13 +18,9 @@ class User < ApplicationRecord
     authorization = Authorization.where(provider: auth.provider, uid: auth.uid.to_s).first
     return authorization.user if authorization
 
-
     name = auth.info[:name] || auth.info[:nickname]
     email = auth.info[:email]
-
-    if !email
-      email = "#{auth.info[:nickname]}@sof.sof"
-    end
+    email = "#{auth.info[:nickname]}@sof.sof" unless email
 
     user = User.where(email: email).first
     if user
