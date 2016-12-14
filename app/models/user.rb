@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook, :twitter]
+         :recoverable, :rememberable, :confirmable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook, :twitter]
 
   has_many :questions, dependent: :destroy
   has_many :answers, dependent: :destroy
@@ -18,8 +18,8 @@ class User < ApplicationRecord
     authorization = Authorization.where(provider: auth.provider, uid: auth.uid.to_s).first
     return authorization.user if authorization
 
-    name = auth.info[:name] || auth.info[:nickname]
-    email = auth.info[:email] || "#{auth.info[:nickname]}@sof.sof"
+    name = auth.info[:name]
+    email = auth.info[:email]
 
     user = User.where(email: email).first
 
