@@ -1,0 +1,17 @@
+.container
+  .row
+    .col-md-offset-3.col-md-6.col-md-offset-3
+      .panel.panel-default.devise-bs
+        .panel-heading
+          %h4= "Add Email"
+        .panel-body
+          = form_tag sign_in_email_path, method: :post do
+            .form-group
+              = label_tag 'Name'
+              = text_field 'auth[info]', :name, autofocus: true, class: "form-control"
+            .form-group
+              = label_tag 'Email'
+              = email_field 'auth[info]', :email, autofocus: true, class: "form-control"
+            = hidden_field_tag 'auth[provider]', auth.provider
+            = hidden_field_tag 'auth[uid]', auth.uid
+            = submit_tag 'Save', class: "btn btn-primary"
