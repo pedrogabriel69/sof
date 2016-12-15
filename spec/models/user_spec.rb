@@ -34,7 +34,7 @@ RSpec.describe User, type: :model do
 
     context "user doesn't have authorization" do
       context 'user already exist' do
-        let(:auth) { OmniAuth::AuthHash.new(provider: 'facebook', uid: '123456', info: { email: user.email }) }
+        let(:auth) { OmniAuth::AuthHash.new(provider: 'facebook', uid: '123456', info: { email: user.email, name: user.name }) }
         it "doesn't create new user" do
           expect { User.find_for_oauth(auth) }.to_not change(User, :count)
         end
