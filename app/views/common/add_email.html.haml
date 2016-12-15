@@ -8,8 +8,8 @@
           = form_tag sign_in_email_path, method: :post do
             .form-group
               = label_tag 'Email'
-              = email_field 'auth[info]', :email, autofocus: true, class: "form-control"
+              = email_field 'auth[info]', :email, autofocus: true, class: "form-control", id: "add-email", placeholder: "Can't be empty"
             = hidden_field_tag 'auth[info][name]', auth.info[:name] || auth.info[:nickname]
             = hidden_field_tag 'auth[provider]', auth.provider
             = hidden_field_tag 'auth[uid]', auth.uid
-            = submit_tag 'Save', class: "btn btn-primary"
+            = submit_tag 'Save', class: "btn btn-primary sendButton"

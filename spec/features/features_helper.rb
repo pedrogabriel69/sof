@@ -5,9 +5,10 @@ RSpec.configure do |config|
 
   config.include FeatureHelper, type: :feature
   config.include WaitForAjax, type: :feature
+  config.include OmniauthMacros
 
   config.use_transactional_fixtures = false
-  Capybara.server = :puma 
+  Capybara.server = :puma
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
