@@ -4,5 +4,6 @@ FactoryGirl.define do
     sequence(:name) { |n| "user#{n}" }
     password 'Qwerty$4'
     password_confirmation 'Qwerty$4'
+    confirmed_at { Time.zone.now }
   end
 end

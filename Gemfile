@@ -38,6 +38,7 @@ group :development, :test do
   gem 'launchy'
   gem 'capybara-webkit'
   gem 'database_cleaner'
+  gem 'capybara-email'
 end
 
 group :development do
