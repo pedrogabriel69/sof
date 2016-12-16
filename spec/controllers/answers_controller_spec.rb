@@ -10,7 +10,7 @@ RSpec.describe AnswersController, type: :controller do
   sign_in_user
 
   let(:question) { create(:question, user: @user) }
-  let(:answer) { create(:answer, user: @user, question: question, flag: false) }
+  let(:answer) { create(:answer, user: @user, question: question, flag: false, body: 'My Answer') }
 
   let(:user) { create(:user, email: 'test@test.io') }
   let!(:other_answer) { create(:answer, user: user, question: question) }

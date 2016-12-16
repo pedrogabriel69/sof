@@ -23,16 +23,19 @@ class Ability
 
   def user_abilities
     guest_abilities
-    can :create, [Question, Answer, Comment]
+    can :create, [Question, Answer, Comment, Attachment]
     can [:update, :destroy], [Question, Answer], user: user
-    # can :like, [Question, Answer] do |parent|
-    #   !user.is_author_of?(parent)
-    # end
-    # can :unlike, [Question, Answer] do |parent|
-    #   !user.is_author_of?(parent)
-    # end
-    # can :best, Answer do |parent|
-    #   user.is_author_of?(parent)
-    # end
+
+    can :destroy, Attachment do |object|
+      user.author?(object.attachmentable)
+    end
+
+    can [:like, :unlike], [Question, Answer] do |object|
+      !user.author?(object)
+    end
+
+    can :best, Answer do |object|
+      user.author?(object.question)
+    end
   end
 end
