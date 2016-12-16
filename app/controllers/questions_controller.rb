@@ -6,6 +6,8 @@ class QuestionsController < ApplicationController
   before_action :build_answer_comment, only: :show
   after_action :publish_question, only: [:create]
 
+  authorize_resource
+
   def index
     respond_with(@questions = Question.all)
   end
