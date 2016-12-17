@@ -3,7 +3,7 @@ h4
     | #{@question.title}
 br/
 = @question.body
-.col-md-offset-10.col-md-2
+.col-md-offset-11.col-md-1
   - if gon.user_id == @question.user_id
-    a.btn.btn-warning.btn-xs href="#{@question.edit_url}" Edit
-    a.btn.btn-danger.btn-xs data-method="delete" data-confirm="Are you sure?" href="#{@question.destroy_url}" Delete
+    a.glyphicon.glyphicon-pencil href="#{@question.edit_url}"
+    a.glyphicon.glyphicon-remove data-method="delete" data-confirm="Are you sure?" href="#{@question.destroy_url}"

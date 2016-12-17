@@ -17,20 +17,18 @@ div id="answer_#{@answer.id}"
       div id="attachment_#{attach.id}"
         a[href="#{attach.file_url}"]
           | #{attach.file_name}
-        a data-type="json" data-method="delete" data-remote="true" href="/attachments/#{attach.id}" delete
+        a.glyphicon.glyphicon-remove data-type="json" data-method="delete" data-remote="true" href="/attachments/#{attach.id}"
 
-  .col-md-offset-10.col-md-3
+  .col-md-offset-11.col-md-3
     p
       - if gon.user_id
-        a.btn.btn-default.btn-xs.answer-comment-link data-answer-id="#{@answer.id}" href="" Comment
+        a.glyphicon.glyphicon-comment.answer-comment-link data-answer-id="#{@answer.id}" href=""
       - if gon.user_id == @question.user_id
-        a.btn.btn-default.btn-xs href="#{@answer.best_url}" Best
+        a.glyphicon.glyphicon-star-empty href="#{@answer.best_url}"
       - if gon.user_id == @answer.user_id
-        a.btn.btn-warning.btn-xs.edit-answer-link data-answer-id="#{@answer.id}" href=""  Edit
-        a.btn.btn-danger.btn-xs.destroy-answer-link data-method="delete" data-remote="true" href="#{@answer.destroy_url}" Delete
+        a.glyphicon.glyphicon-pencil.edit-answer-link data-answer-id="#{@answer.id}" href=""
+        a.glyphicon.glyphicon-remove.destroy-answer-link data-method="delete" data-remote="true" href="#{@answer.destroy_url}"
   .col-md-offset-1
-    hr
-    hr
     hr
   .col-md-offset-1
     form.simple_form.new_comment data-remote="true" method="post" style="display: none;" id="new-comment-#{@answer.id}"
