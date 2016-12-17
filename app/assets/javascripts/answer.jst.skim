@@ -12,8 +12,7 @@ div id="answer_#{@answer.id}"
   .col-md-11
     = @answer.body
   .col-md-offset-1
-    p
-      strong Attachments:
+    h5 Attachments:
     - for attach in @answer.attachments
       div id="attachment_#{attach.id}"
         a[href="#{attach.file_url}"]
@@ -29,7 +28,10 @@ div id="answer_#{@answer.id}"
       - if gon.user_id == @answer.user_id
         a.btn.btn-warning.btn-xs.edit-answer-link data-answer-id="#{@answer.id}" href=""  Edit
         a.btn.btn-danger.btn-xs.destroy-answer-link data-method="delete" data-remote="true" href="#{@answer.destroy_url}" Delete
-
+  .col-md-offset-1
+    hr
+    hr
+    hr
   .col-md-offset-1
     form.simple_form.new_comment data-remote="true" method="post" style="display: none;" id="new-comment-#{@answer.id}"
       .comment_errors

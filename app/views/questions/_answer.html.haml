@@ -9,14 +9,12 @@
   .col-md-11
     = answer.body
   .col-md-offset-1
-    %p
-      %strong Attachments:
+    %h5 Attachments:
     - answer.attachments.each do |a|
       %div{id: "attachment_#{a.id}"}
         = link_to a.file.identifier, a.file.url
         - if user_signed_in? && current_user.author?(answer)
           = link_to 'delete', a, method: :delete, remote: true
-          %br
   .col-md-offset-10.col-md-3
     - if user_signed_in?
       = link_to 'Comment', '', class: "btn btn-default btn-xs answer-comment-link", data: { answer_id: answer.id }
@@ -25,7 +23,9 @@
     - if user_signed_in? && current_user.author?(answer)
       = link_to 'Edit', '', class: "btn btn-warning btn-xs edit-answer-link", data: { answer_id: answer.id }
       = link_to 'Delete', [@question, answer], method: :delete, remote: true, class: "btn btn-danger btn-xs"
-
+  .col-md-offset-1
+    %hr
+    %hr
   .col-md-offset-1
     = render 'comments/answer_comment_form', answer: answer
 
