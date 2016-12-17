@@ -32,7 +32,7 @@ feature 'User edit answer', '
 
     visit question_path(question)
 
-    click_link('Edit')
+    find('.glyphicon-pencil.edit-answer-link').click
     within '.edit_answer' do
       fill_in('Your answer', with: 'My New Answer')
       click_button 'Edit'
@@ -50,7 +50,7 @@ feature 'User edit answer', '
     sign_in(new_user)
 
     visit question_path(question)
-    click_link('Edit')
+    find('.glyphicon-pencil.edit-answer-link').click
     within '.edit_answer' do
       fill_in('Your answer', with: '')
       click_button 'Edit'

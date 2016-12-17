@@ -32,7 +32,7 @@ feature 'User edit answer', '
     visit question_path(question)
 
     within "#answer_#{answer_2.id}" do
-      click_link('Best')
+      find('.glyphicon-star-empty').click
     end
 
     expect(current_path).to eq question_path(question)
