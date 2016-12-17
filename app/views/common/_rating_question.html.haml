@@ -1,8 +1,4 @@
-.col-xs-1.questions
-  %br
-  %br
-  %br
-  %br
+.questions
   - if user_signed_in?
     = link_to '', like_question_path(resource), remote: true, class: "glyphicon glyphicon-triangle-top votes question-like", data: { type: :json }
     .rating

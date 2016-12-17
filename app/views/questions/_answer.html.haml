@@ -1,20 +1,23 @@
 %div{id: "answer_#{answer.id}"}
-  = render 'common/rating_answers', resource: answer
-  %br/
-  %strong
-    = answer.user.name
-    = "added #{time_ago_in_words answer.created_at} ago"
-  %br
-  = answer.body
-  %p
-    %strong Attachments:
-  - answer.attachments.each do |a|
-    %div{id: "attachment_#{a.id}"}
-      = link_to a.file.identifier, a.file.url
-      - if user_signed_in? && current_user.author?(answer)
-        = link_to 'delete', a, method: :delete, remote: true
-        %br
-  .col-md-offset-9.col-md-3
+  .col-md-offset-1
+    %strong
+      = answer.user.name
+      = "added #{time_ago_in_words answer.created_at} ago"
+    %br
+  .col-md-1
+    = render 'common/rating_answers', resource: answer
+  .col-md-11
+    = answer.body
+  .col-md-offset-1
+    %p
+      %strong Attachments:
+    - answer.attachments.each do |a|
+      %div{id: "attachment_#{a.id}"}
+        = link_to a.file.identifier, a.file.url
+        - if user_signed_in? && current_user.author?(answer)
+          = link_to 'delete', a, method: :delete, remote: true
+          %br
+  .col-md-offset-10.col-md-3
     - if user_signed_in?
       = link_to 'Comment', '', class: "btn btn-default btn-xs answer-comment-link", data: { answer_id: answer.id }
     - if user_signed_in? && current_user.author?(@question)
@@ -23,16 +26,17 @@
       = link_to 'Edit', '', class: "btn btn-warning btn-xs edit-answer-link", data: { answer_id: answer.id }
       = link_to 'Delete', [@question, answer], method: :delete, remote: true, class: "btn btn-danger btn-xs"
 
-  = render 'comments/answer_comment_form', answer: answer
+  .col-md-offset-1
+    = render 'comments/answer_comment_form', answer: answer
 
-  - if answer.comments.present?
-    %h6
-      = "#{answer.comments.count} Comments"
-  %div{id: "comment_answer_#{answer.id}"}
-    - answer.comments.ordered_comment.each do |comment|
-      = render 'comments/comment', comment: comment
+    - if answer.comments.present?
+      %h6
+        = "#{answer.comments.count} Comments"
+    %div{id: "comment_answer_#{answer.id}"}
+      - answer.comments.ordered_comment.each do |comment|
+        = render 'comments/comment', comment: comment
 
-  = simple_form_for([@question, answer], remote: true, html: { id: "edit-answer-#{answer.id}" }) do |f|
-    .answer_errors
-    = f.input :body, label: false, placeholder: 'Your answer'
-    = f.submit "Edit", class: "btn btn-primary btn-sm"
+    = simple_form_for([@question, answer], remote: true, html: { id: "edit-answer-#{answer.id}" }) do |f|
+      .answer_errors
+      = f.input :body, label: false, placeholder: 'Your answer'
+      = f.submit "Edit", class: "btn btn-primary btn-sm"

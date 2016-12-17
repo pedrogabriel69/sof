@@ -1,45 +1,51 @@
 .container
   .row
     = render 'buttons'
-    = render 'common/rating_question', resource: @question
-    .col-md-10.question
+    .question
       %div
-        %h4
-          = @question.user.name
-          %p= @question.title
-        = @question.body
-        %p
-          %strong Attachments:
-        - @question.attachments.each do |a|
-          %div{id: "attachment_#{a.id}"}
-            = link_to a.file.identifier, a.file.url
-            - if user_signed_in? && current_user.author?(@question)
-              = link_to 'delete', a, method: :delete, remote: true
-              %br
+        .col-md-offset-1.col-md-11
+          %h4
+            = @question.user.name
+            %p= @question.title
+        .col-md-1
+          = render 'common/rating_question', resource: @question
+        .col-md-11
+          = @question.body
+        .col-md-offset-1
+          %p
+            %strong Attachments:
+          - @question.attachments.each do |a|
+            %div{id: "attachment_#{a.id}"}
+              = link_to a.file.identifier, a.file.url
+              - if user_signed_in? && current_user.author?(@question)
+                = link_to 'delete', a, method: :delete, remote: true
+                %br
 
-        = render 'links_comment', question: @question
-        = render 'comments/question_comment_form'
+          = render 'links_comment', question: @question
+          = render 'comments/question_comment_form'
 
-        - if @question.comments.present?
-          %h6
-            = "#{@question.comments.count} Comments"
-        .comments
-          - @question.comments.ordered_comment.each do |comment|
-            = render 'comments/comment', comment: comment
+          - if @question.comments.present?
+            %h6
+              = "#{@question.comments.count} Comments"
+          .comments
+            - @question.comments.ordered_comment.each do |comment|
+              = render 'comments/comment', comment: comment
 
         - if @question.answers.present?
-          %h4
-            = "#{@question.answers.count} Answers"
+          .col-md-offset-1
+            %h4
+              = "#{@question.answers.count} Answers"
         .answers
           = render 'questions/answers'
 
-        - if user_signed_in?
-          .new_answer_form
-            = simple_form_for([@question, @answer], remote: true) do |f|
-              .answer_errors
-              = f.input :body, label: false, placeholder: 'Your answer'
-              = f.simple_fields_for :attachments do |a|
-                = render 'attachment_fields', f: a
-              .links
-                = link_to_add_association 'Attach file', f, :attachments
-              = f.submit "Save", class: "btn btn-primary btn-sm"
+        .col-md-offset-1
+          - if user_signed_in?
+            .new_answer_form
+              = simple_form_for([@question, @answer], remote: true) do |f|
+                .answer_errors
+                = f.input :body, label: false, placeholder: 'Your answer'
+                = f.simple_fields_for :attachments do |a|
+                  = render 'attachment_fields', f: a
+                .links
+                  = link_to_add_association 'Attach file', f, :attachments
+                = f.submit "Save", class: "btn btn-primary btn-sm"
