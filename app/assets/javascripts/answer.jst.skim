@@ -31,6 +31,12 @@ div id="answer_#{@answer.id}"
         a.btn.btn-danger.btn-xs.destroy-answer-link data-method="delete" data-remote="true" href="#{@answer.destroy_url}" Delete
 
   .col-md-offset-1
+    form.simple_form.new_comment data-remote="true" method="post" style="display: none;" id="new-comment-#{@answer.id}"
+      .comment_errors
+      .form-group.text.required.comment_body
+        input#comment_body.form-control.string.required placeholder="Your comment" name="comment[body]"
+      input.btn.btn-primary.btn-sm type="submit" name="commit" value="Save" data-disable-with="Save"
+
     form.simple_form.edit_answer data-remote="true" method="post" style="display: none;" id="edit-answer-#{@answer.id}"
       .answer_errors
       .form-group.text.required.answer_body
