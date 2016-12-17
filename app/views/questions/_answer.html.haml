@@ -14,17 +14,16 @@
       %div{id: "attachment_#{a.id}"}
         = link_to a.file.identifier, a.file.url
         - if user_signed_in? && current_user.author?(answer)
-          = link_to 'delete', a, method: :delete, remote: true
-  .col-md-offset-10.col-md-3
+          = link_to '', a, class: "glyphicon glyphicon-remove", method: :delete, remote: true
+  .col-md-offset-11.col-md-3
     - if user_signed_in?
-      = link_to 'Comment', '', class: "btn btn-default btn-xs answer-comment-link", data: { answer_id: answer.id }
+      = link_to '', '', class: "glyphicon glyphicon-comment answer-comment-link", data: { answer_id: answer.id }
     - if user_signed_in? && current_user.author?(@question)
       = best_btn(@question, answer)
     - if user_signed_in? && current_user.author?(answer)
-      = link_to 'Edit', '', class: "btn btn-warning btn-xs edit-answer-link", data: { answer_id: answer.id }
-      = link_to 'Delete', [@question, answer], method: :delete, remote: true, class: "btn btn-danger btn-xs"
+      = link_to '', '', class: "glyphicon glyphicon-pencil edit-answer-link", data: { answer_id: answer.id }
+      = link_to '', [@question, answer], method: :delete, remote: true, class: "glyphicon glyphicon-remove"
   .col-md-offset-1
-    %hr
     %hr
   .col-md-offset-1
     = render 'comments/answer_comment_form', answer: answer
