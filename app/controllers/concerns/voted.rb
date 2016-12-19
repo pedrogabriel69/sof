@@ -6,10 +6,12 @@ module Voted
   end
 
   def like
+    authorize! :like, @votable
     @votable.liked_by current_user unless current_user.author?(@votable)
   end
 
   def unlike
+    authorize! :unlike, @votable
     @votable.downvote_from current_user unless current_user.author?(@votable)
   end
 
