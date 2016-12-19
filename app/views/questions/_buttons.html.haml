@@ -1,4 +1,4 @@
-- if user_signed_in?
+- if can? :create, Question
   .col-md-offset-7.col-md-6
     = link_to "My profile", "#", class: "btn btn-primary btn-sm"
     = link_to "Questions", "#", class: "btn btn-primary btn-sm"

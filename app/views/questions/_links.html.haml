@@ -1,5 +1,5 @@
 .col-md-offset-11.col-md-1
-  - if user_signed_in? && current_user.author?(question)
+  - if can? :update, question
     = link_to '', edit_question_path(question), class: "glyphicon glyphicon-pencil", "data-target": "#edit_modal", "data-toggle": "modal"
     #edit_modal.modal.fade
       .modal-dialog

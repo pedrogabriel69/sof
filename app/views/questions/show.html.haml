@@ -16,7 +16,7 @@
           - @question.attachments.each do |a|
             %div{id: "attachment_#{a.id}"}
               = link_to a.file.identifier, a.file.url
-              - if user_signed_in? && current_user.author?(@question)
+              - if can? :destroy, a
                 = link_to '', a, class: "glyphicon glyphicon-remove", method: :delete, remote: true
 
           = render 'links_comment', question: @question
@@ -38,7 +38,7 @@
           = render 'questions/answers'
 
         .col-md-offset-1
-          - if user_signed_in?
+          - if can? :create, Answer
             .new_answer_form
               = simple_form_for([@question, @answer], remote: true) do |f|
                 .answer_errors

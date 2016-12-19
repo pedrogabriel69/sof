@@ -13,14 +13,14 @@
     - answer.attachments.each do |a|
       %div{id: "attachment_#{a.id}"}
         = link_to a.file.identifier, a.file.url
-        - if user_signed_in? && current_user.author?(answer)
+        - if can? :destroy, a
           = link_to '', a, class: "glyphicon glyphicon-remove", method: :delete, remote: true
   .col-md-offset-11.col-md-3
-    - if user_signed_in?
+    - if can? :create, Comment
       = link_to '', '', class: "glyphicon glyphicon-comment answer-comment-link", data: { answer_id: answer.id }
-    - if user_signed_in? && current_user.author?(@question)
+    - if user_signed_in?
       = best_btn(@question, answer)
-    - if user_signed_in? && current_user.author?(answer)
+    - if can? :update, answer
       = link_to '', '', class: "glyphicon glyphicon-pencil edit-answer-link", data: { answer_id: answer.id }
       = link_to '', [@question, answer], method: :delete, remote: true, class: "glyphicon glyphicon-remove"
   .col-md-offset-1
