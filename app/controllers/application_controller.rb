@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |e|
     respond_to do |format|
       format.html { redirect_to root_url, alert: e.message }
-      format.js { render nothing: true, status: :forbidden }
+      format.js { render partial: 'common/exception', status: :forbidden, locals: { resource: e } }
       format.json { render json: e.message, status: :unauthorized }
     end
   end
