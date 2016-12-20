@@ -9,14 +9,8 @@ class Api::V1::ProfilesController < ApplicationController
   end
 
   def index
-    @users = users_except_current
+    @users = User.where.not(id: current_resourse_owner.id)
     respond_with @users
-  end
-
-  private
-
-  def users_except_current
-    doorkeeper_token.present? ? User.where.not(id: current_resourse_owner.id) : User.all
   end
 
   protected
