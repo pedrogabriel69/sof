@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Profile API' do
+describe 'Question API' do
   describe 'GET/index' do
     context 'unauthorized' do
       it "returns 401 status if access token doesn't exist" do
