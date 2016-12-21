@@ -13,11 +13,9 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
-  def twitter
-  end
+  def twitter; end
 
-  def sign_in_email
-  end
+  def sign_in_email; end
 
   private
 

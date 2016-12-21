@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :confirmable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook, :twitter]
+         :recoverable, :rememberable, :confirmable,
+         :trackable, :validatable, :omniauthable,
+         omniauth_providers: [:facebook, :twitter]
 
   has_many :questions, dependent: :destroy
   has_many :answers, dependent: :destroy
@@ -28,7 +30,8 @@ class User < ApplicationRecord
       user.authorizations.create(provider: auth.provider, uid: auth.uid)
     else
       password = Devise.friendly_token[0, 20]
-      user = User.create!(name: name, email: email, password: password, password_confirmation: password)
+      user = User.create!(name: name, email: email,
+                          password: password, password_confirmation: password)
       user.authorizations.create(provider: auth.provider, uid: auth.uid)
     end
     user
