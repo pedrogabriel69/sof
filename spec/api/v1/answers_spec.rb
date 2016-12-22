@@ -71,4 +71,36 @@ describe 'Answer API' do
       end
     end
   end
+
+  describe 'POST/create' do
+    let(:user) { create(:user) }
+    let(:access_token) { create(:access_token, resource_owner_id: user.id) }
+    let(:question) { create(:question, user: user) }
+
+    context 'valid params' do
+      let(:subject) { post "/api/v1/questions/#{question.id}/answers", access_token: access_token.token, format: :json, answer: attributes_for(:answer) }
+
+      it 'returns status 201' do
+        subject
+        expect(response.status).to eq 201
+      end
+
+      it "creates new answer" do
+        expect { subject }.to change(question.answers, :count).by(1)
+      end
+    end
+
+    context 'invalid params' do
+      let(:subject) { post "/api/v1/questions/#{question.id}/answers", access_token: access_token.token, format: :json, answer: attributes_for(:invalid_answer) }
+
+      it 'returns status 422' do
+        subject
+        expect(response.status).to eq 422
+      end
+
+      it "doest't creates new answer" do
+        expect { subject }.to_not change(question.answers, :count)
+      end
+    end
+  end
 end

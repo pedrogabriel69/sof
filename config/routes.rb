@@ -34,8 +34,8 @@ Rails.application.routes.draw do
         get :me, on: :collection
         get :index, on: :collection
       end
-      resources :questions, only: [:index, :show] do
-        resources :answers, only: [:index, :show]
+      resources :questions, except: [:edit, :update, :destroy] do
+        resources :answers, except: [:edit, :update, :destroy]
       end
     end
   end

@@ -116,4 +116,35 @@ describe 'Question API' do
       end
     end
   end
+
+  describe 'POST/create' do
+    let(:user) { create(:user) }
+    let(:access_token) { create(:access_token, resource_owner_id: user.id) }
+
+    context 'valid params' do
+      let(:subject) { post "/api/v1/questions", format: :json, access_token: access_token.token, question: attributes_for(:question) }
+
+      it 'returns status 201' do
+        subject
+        expect(response.status).to eq 201
+      end
+
+      it 'creates new question' do
+        expect { subject }.to change(user.questions, :count).by(1)
+      end
+    end
+
+    context 'invalid params' do
+      let(:subject) { post "/api/v1/questions", format: :json, access_token: access_token.token, question: attributes_for(:invalid_question) }
+
+      it 'returns status 422' do
+        subject
+        expect(response.status).to eq 422
+      end
+
+      it "doest't creates new question" do
+        expect { subject }.to_not change(user.questions, :count)
+      end
+    end
+  end
 end
