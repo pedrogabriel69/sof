@@ -2,17 +2,7 @@ require 'rails_helper'
 
 describe 'Profile API' do
   describe 'GET/me' do
-    context 'unauthorized' do
-      it "returns 401 status if access token doesn't exist" do
-        get '/api/v1/profiles/me', format: :json
-        expect(response.status).to eq 401
-      end
-
-      it "returns 401 status if access token is invalid" do
-        get '/api/v1/profiles/me', format: :json, access_token: '1234'
-        expect(response.status).to eq 401
-      end
-    end
+    it_behaves_like 'API Authenticable'
 
     context 'authorized' do
       let(:user) { create(:user) }
@@ -20,9 +10,7 @@ describe 'Profile API' do
 
       before { get '/api/v1/profiles/me', format: :json, access_token: access_token.token }
 
-      it "returns status 200" do
-        expect(response).to be_success
-      end
+      it_behaves_like 'API Success'
 
       %w(id name email created_at updated_at admin).each do |elem|
         it "contain #{elem}" do
@@ -30,15 +18,17 @@ describe 'Profile API' do
         end
       end
 
-      %w(password encrypted_password).each do |elem|
-        it "doesn't include #{elem}" do
-          expect(response.body).to_not have_json_path(elem)
-        end
-      end
+      it_behaves_like "API doesn't include password"
+    end
+
+    def do_request(options={})
+      get '/api/v1/profiles/me', { format: :json }.merge(options)
     end
   end
 
   describe 'GET/index' do
+    it_behaves_like 'API Authenticable'
+
     context 'all users except current' do
       let!(:user_1) { create(:user, name: 'user_1', email: 'user_1@test.io') }
       let!(:user_2) { create(:user, name: 'user_2', email: 'user_2@test.io') }
@@ -47,15 +37,12 @@ describe 'Profile API' do
 
       before { get '/api/v1/profiles', format: :json, access_token: access_token.token }
 
-      it 'returns 200 status' do
-        expect(response).to be_success
-      end
+      it_behaves_like 'API Success'
+      it_behaves_like "API doesn't include password"
+    end
 
-      %w(password encrypted_password).each do |elem|
-        it "doesn't include #{elem}" do
-          expect(response.body).to_not have_json_path(elem)
-        end
-      end
+    def do_request(options={})
+      get '/api/v1/profiles', { format: :json }.merge(options)
     end
   end
 end
