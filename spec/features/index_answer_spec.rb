@@ -4,10 +4,10 @@ feature 'User see question and list of answers', '
   I want to be able see answers and question
 ' do
 
-  given(:user) { create(:user) }
-  given!(:question) { create(:question, user: user) }
-  given!(:a1) { create(:answer, question: question, user: user) }
-  given!(:a2) { create(:answer, question: question, user: user) }
+  let(:user) { create(:user) }
+  let!(:question) { create(:question, user: user) }
+  let!(:a1) { create(:answer, question: question, user: user) }
+  let!(:a2) { create(:answer, question: question, user: user) }
 
   scenario 'Registrated user see question and list of answers' do
     sign_in(user)

@@ -3,11 +3,11 @@ require_relative 'features_helper'
 feature 'Add files to answer', '
   I need attach files to my answers
 ' do
-  #given - let, background - before
-  given(:user) { create(:user) }
-  given(:question) { create(:question, user: user) }
 
-  background do
+  let(:user) { create(:user) }
+  let(:question) { create(:question, user: user) }
+
+  before do
     sign_in(user)
     visit question_path(question)
   end

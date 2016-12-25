@@ -4,9 +4,9 @@ feature 'Add files to question', '
   I need attach files to my questions
 ' do
 
-  given(:user) { create(:user) }
+  let(:user) { create(:user) }
 
-  background do
+  before do
     sign_in(user)
     click_on('Ask question')
   end

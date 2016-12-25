@@ -4,7 +4,7 @@ feature 'User sign in', '
   For checking sing in
 ' do
 
-  given(:user) { create(:user) }
+  let(:user) { create(:user) }
 
   scenario 'Registrated User try to sign in' do
     sign_in(user)

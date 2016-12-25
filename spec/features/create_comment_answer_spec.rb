@@ -4,10 +4,10 @@ feature 'User create comment to answer', '
   I want to be able add comments to answer
 ' do
 
-  given(:user) { create(:user) }
-  given(:guest) { create(:user) }
-  given(:question) { create(:question, user: user) }
-  given!(:answer) { create(:answer, user: user, question: question) }
+  let(:user) { create(:user) }
+  let(:guest) { create(:user) }
+  let(:question) { create(:question, user: user) }
+  let!(:answer) { create(:answer, user: user, question: question) }
 
   scenario 'Authenticated user creates comment to answer', js: true do
     sign_in(user)

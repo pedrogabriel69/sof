@@ -4,9 +4,9 @@ feature 'User create comment to question', '
   I want to be able add comments to question
 ' do
 
-  given(:user) { create(:user) }
-  given(:guest) { create(:user) }
-  given(:question) { create(:question, user: user) }
+  let(:user) { create(:user) }
+  let(:guest) { create(:user) }
+  let(:question) { create(:question, user: user) }
 
   scenario 'Authenticated user creates comment to question', js: true do
     sign_in(user)

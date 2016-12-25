@@ -4,8 +4,8 @@ feature 'User create question', '
   I want to be able ask questions
 ' do
 
-  given(:user) { create(:user) }
-  given(:guest) { create(:user) }
+  let(:user) { create(:user) }
+  let(:guest) { create(:user) }
 
   scenario 'Authenticated user creates question' do
     sign_in(user)

@@ -4,9 +4,9 @@ feature 'User see list of questions', '
   I want to be able see questions
 ' do
 
-  given(:user) { create(:user) }
-  given!(:q1) { create(:question, user: user) }
-  given!(:q2) { create(:question, user: user) }
+  let(:user) { create(:user) }
+  let!(:q1) { create(:question, user: user) }
+  let!(:q2) { create(:question, user: user) }
 
   scenario 'Registrated user see list of questions' do
     sign_in(user)

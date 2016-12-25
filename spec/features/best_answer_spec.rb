@@ -4,11 +4,11 @@ feature 'User edit answer', '
   I want to be able edit answer
 ' do
 
-  given(:user) { create(:user) }
-  given(:new_user) { create(:user) }
-  given(:question) { create(:question, user: user) }
-  given!(:answer) { create(:answer, user: user, question: question, body: 'My Answer 1') }
-  given!(:answer_2) { create(:answer, user: new_user, question: question, body: 'My Answer 2') }
+  let(:user) { create(:user) }
+  let(:new_user) { create(:user) }
+  let(:question) { create(:question, user: user) }
+  let!(:answer) { create(:answer, user: user, question: question, body: 'My Answer 1') }
+  let!(:answer_2) { create(:answer, user: new_user, question: question, body: 'My Answer 2') }
 
   scenario 'Not registrated user try to choose best answer' do
     visit question_path(question)

@@ -4,10 +4,10 @@ feature 'User edit answer', '
   I want to be able edit answer
 ' do
 
-  given(:user) { create(:user) }
-  given(:new_user) { create(:user) }
-  given(:question) { create(:question, user: user) }
-  given!(:answer) { create(:answer, user: new_user, question: question) }
+  let(:user) { create(:user) }
+  let(:new_user) { create(:user) }
+  let(:question) { create(:question, user: user) }
+  let!(:answer) { create(:answer, user: new_user, question: question) }
 
   scenario 'Not registrated user try edit answer' do
     visit question_path(question)

@@ -4,8 +4,8 @@ feature 'User see question with answers', '
   I want to be able see question with answers
 ' do
 
-  given(:user) { create(:user) }
-  given(:question) { create(:question, user: user) }
+  let(:user) { create(:user) }
+  let(:question) { create(:question, user: user) }
 
   scenario 'Authenticated user creates question' do
     sign_in(user)

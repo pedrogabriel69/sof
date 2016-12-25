@@ -5,10 +5,10 @@ feature 'User vote for answer', '
   I want vote for answer
 ' do
 
-  given(:user) { create(:user) }
-  given(:user_2) { create(:user) }
-  given(:question) { create(:question, user: user_2) }
-  given!(:answer) { create(:answer, question: question, user: user_2) }
+  let(:user) { create(:user) }
+  let(:user_2) { create(:user) }
+  let(:question) { create(:question, user: user_2) }
+  let!(:answer) { create(:answer, question: question, user: user_2) }
 
   scenario 'Authanticated user try to vote for own answer', js: true do
     sign_in(user_2)
