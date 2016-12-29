@@ -8,6 +8,9 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/email/rspec'
 require 'cancan/matchers'
+require 'sidekiq/testing'
+
+Sidekiq::Testing.inline!
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 

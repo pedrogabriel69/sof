@@ -31,6 +31,9 @@ gem 'doorkeeper'
 gem 'active_model_serializers'
 gem 'oj'
 gem 'oj_mimic_json'
+gem 'sidekiq'
+gem 'sinatra', require: nil
+gem 'sidetiq'
 
 group :development, :test do
   gem 'byebug', platform: :mri
