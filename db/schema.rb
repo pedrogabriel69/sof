@@ -32,9 +32,7 @@ ActiveRecord::Schema.define(version: 20161219224828) do
     t.datetime "updated_at",          null: false
     t.integer  "attachmentable_id"
     t.string   "attachmentable_type"
-    t.integer  "user_id"
     t.index ["attachmentable_id", "attachmentable_type"], name: "index_attachments_on_attachmentable_id_and_attachmentable_type", using: :btree
-    t.index ["user_id"], name: "index_attachments_on_user_id", using: :btree
   end
 
   create_table "authorizations", force: :cascade do |t|
