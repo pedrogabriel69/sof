@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :votes, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :authorizations, dependent: :destroy
+  has_many :follows, dependent: :destroy
 
   validates :name, presence: true
 
@@ -39,7 +40,7 @@ class User < ApplicationRecord
 
   def self.send_daily_digest
     find_each.each do |user|
-      DailyMailer.digest(user).deliver_later
+      DailyMailer.digest(user, Question.last_questions.to_a).deliver_later
     end
   end
 end

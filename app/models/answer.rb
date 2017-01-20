@@ -2,6 +2,8 @@ class Answer < ApplicationRecord
   include Votable
   include Commentable
 
+  after_commit :send_email, on: :create
+
   belongs_to :question
 
   validates :body, presence: true
@@ -13,5 +15,9 @@ class Answer < ApplicationRecord
       question.answers.update_all(flag: false)
       update!(flag: true)
     end
+  end
+
+  def send_email
+    NewAnswerJob.perform_later(self)
   end
 end
