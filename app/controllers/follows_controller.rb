@@ -4,11 +4,14 @@ class FollowsController < ApplicationController
 
   authorize_resource
 
+  respond_to :js
+
   def create
     respond_with @follow = @question.follows.create(user: current_user)
   end
 
   def destroy
+    @follow = Follow.find(params[:id])
     respond_with @follow.destroy
   end
 

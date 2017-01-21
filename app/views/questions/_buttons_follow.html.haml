@@ -1,0 +1,12 @@
+.follow_btn
+  - if can? :create, Question
+    .col-md-offset-8.col-md-5
+      - if !current_user.author?(question)
+        = follow_btn(question)
+      = link_to "My profile", "#", class: "btn btn-primary btn-sm"
+      = link_to "Users", "#", class: "btn btn-primary btn-sm"
+      = link_to "Search", "#", class: "btn btn-primary btn-sm"
+      = link_to "Ask question", new_question_path, class: "btn btn-primary btn-sm", "data-target": "#new_modal", "data-toggle": "modal"
+      #new_modal.modal.fade
+        .modal-dialog
+          .modal-content

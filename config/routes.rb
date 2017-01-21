@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       resources :comments, only: [:create], defaults: { context: 'answer' }
     end
     resources :comments, only: [:create], defaults: { context: 'question' }
+    resources :follows, only: [:create, :destroy]
   end
 
   namespace :api do

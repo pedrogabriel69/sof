@@ -38,5 +38,7 @@ class Ability
     can :best, Answer do |object|
       user.author?(object.question)
     end
+
+    can [:create, :destroy], Follow, user: user
   end
 end
