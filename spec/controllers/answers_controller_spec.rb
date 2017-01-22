@@ -32,7 +32,7 @@ RSpec.describe AnswersController, type: :controller do
     end
 
     context 'not correct work' do
-      it 'create object' do
+      it 'does not create object' do
         expect { post :create, params: { question_id: question, user_id: @user, answer: attributes_for(:invalid_answer), format: :js } }.to_not change(question.answers, :count)
         expect { post :create, params: { question_id: question, user_id: @user, answer: attributes_for(:invalid_answer), format: :js } }.to_not change(@user.answers, :count)
       end
