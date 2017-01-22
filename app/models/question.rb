@@ -9,4 +9,8 @@ class Question < ApplicationRecord
 
   scope :ordered_question, -> { order('created_at ASC') }
   scope :last_questions, -> { where(created_at: DateTime.yesterday) }
+
+  def change_subscr
+    update(check_follow: !check_follow)
+  end
 end

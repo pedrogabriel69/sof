@@ -40,5 +40,6 @@ class Ability
     end
 
     can [:create, :destroy], Follow, user: user
+    can :unsubscribe, Question, user: user
   end
 end

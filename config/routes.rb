@@ -25,6 +25,9 @@ Rails.application.routes.draw do
 
   resources :attachments, only: :destroy
   resources :questions, concerns: [:votable] do
+    member do
+      put :unsubscribe
+    end
     resources :answers, concerns: [:votable] do
       member do
         put :best

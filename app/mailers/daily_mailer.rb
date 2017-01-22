@@ -13,4 +13,11 @@ class DailyMailer < ApplicationMailer
 
     mail to: user.email
   end
+
+  def new_answer_follow(user, answer)
+    @user = user
+    @answer = answer
+
+    mail to: user.email
+  end
 end

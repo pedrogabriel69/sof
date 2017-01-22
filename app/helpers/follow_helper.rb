@@ -7,4 +7,10 @@ module FollowHelper
     method = follow.present? ? :delete : :post
     link_to "#{btn_text}", url, method: method, remote: true, class: "btn #{btn_class} btn-sm"
   end
+
+  def unsubscribe_btn(question)
+    btn_class = question.check_follow ? 'btn-danger' : 'btn-default'
+    btn_text = question.check_follow ? 'Unsubscribe' : 'Subscribe'
+    link_to "#{btn_text}", unsubscribe_question_path(question), method: :put, remote: true, class: "btn #{btn_class} btn-sm"
+  end
 end

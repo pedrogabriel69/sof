@@ -2,9 +2,11 @@ class QuestionsController < ApplicationController
   include Voted
 
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_question, only: [:show, :edit, :update, :destroy, :unsubscribe]
   before_action :build_answer_comment, only: :show
   after_action :publish_question, only: [:create]
+
+  respond_to :js
 
   authorize_resource
 
@@ -35,6 +37,10 @@ class QuestionsController < ApplicationController
 
   def destroy
     respond_with(@question.destroy) if current_user.author?(@question)
+  end
+
+  def unsubscribe
+    respond_with(@question.change_subscr)
   end
 
   private

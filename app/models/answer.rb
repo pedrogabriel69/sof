@@ -18,6 +18,7 @@ class Answer < ApplicationRecord
   end
 
   def send_email
-    NewAnswerJob.perform_later(self)
+    NewAnswerJob.perform_later(self) if question.check_follow
+    NewAnswerFollowJob.perform_later(self)
   end
 end
