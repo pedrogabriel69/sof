@@ -1,4 +1,4 @@
-%h4= "Hi, #{@user.name}, this answer was added to question. You received this mail because you follow on updating this question"
+%h4= "Hi, #{@user.name}, this answer was added to question. You received this mail because you subscribe to updating this question"
 = link_to @answer.question.title, question_url(@answer.question)
 %br
 = @answer.body
