@@ -23,9 +23,8 @@ class Ability
 
   def user_abilities
     guest_abilities
-    can :create, [Question, Answer, Comment, Attachment]
-    can [:update, :destroy], [Question, Answer], user: user
-
+    can :create, [Question, Answer, Comment, Attachment, Follow]
+    can [:update, :destroy], [Question, Answer, Follow], user: user
 
     can :destroy, Attachment do |object|
       user.author?(object.attachmentable)
@@ -39,7 +38,6 @@ class Ability
       user.author?(object.question)
     end
 
-    can [:create, :destroy], Follow, user: user
     can :unsubscribe, Question, user: user
   end
 end

@@ -5,14 +5,13 @@ RSpec.describe FollowsController, type: :controller do
 
   let(:other_user) { create(:user) }
   let(:question) { create(:question, user: @user) }
-  let(:follow) { create(:follow, user: @user, followable_type: "Question", followable_id: question.id) }
-  let(:other_follow) { create(:follow, user: other_user, followable_type: "Question", followable_id: question.id) }
+  let(:follow) { create(:follow, user: @user, followable_id: question.id) }
+  let(:other_follow) { create(:follow, user: other_user, followable_id: question.id) }
 
   describe 'POST #create' do
     context 'correct work' do
       it 'create object' do
-        expect { post :create, params: { user_id: @user, question_id: question, format: :js } }.to change(question.follows, :count).by(1)
-        expect { post :create, params: { user_id: @user, question_id: question, format: :js } }.to change(@user.follows, :count).by(1)
+        expect { post :create, params: { user_id: @user, question_id: question, format: :js } }.to change(question.follows, :count).by(1).and change(@user.follows, :count).by(1)
       end
 
       it 'render show view' do
