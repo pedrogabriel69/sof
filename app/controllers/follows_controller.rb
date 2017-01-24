@@ -6,8 +6,8 @@ class FollowsController < ApplicationController
   respond_to :js
 
   def create
+    authorize! :can_subscribe?, @question
     respond_with @follow = @question.follows.create(user: current_user)
-    authorize! :create, @follow
   end
 
   def destroy

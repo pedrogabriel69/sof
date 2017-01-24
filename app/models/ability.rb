@@ -23,7 +23,7 @@ class Ability
 
   def user_abilities
     guest_abilities
-    can :create, [Question, Answer, Comment, Attachment, Follow]
+    can :create, [Question, Answer, Comment, Attachment]
     can [:update, :destroy], [Question, Answer, Follow], user: user
 
     can :destroy, Attachment do |object|
@@ -39,5 +39,9 @@ class Ability
     end
 
     can :unsubscribe, Question, user: user
+
+    can :can_subscribe?, Question do |object|
+      !object.follows.where(user_id: user.id).first.present? && !user.author?(object)
+    end
   end
 end
