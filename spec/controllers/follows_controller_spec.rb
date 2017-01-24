@@ -19,6 +19,13 @@ RSpec.describe FollowsController, type: :controller do
         expect(response).to render_template :create
       end
     end
+
+    context "incorrrect work" do
+      it 'user can not subscribe twice for one question' do
+        expect { post :create, params: { user_id: @user, question_id: question, format: :js } }.to change(question.follows, :count).by(1).and change(@user.follows, :count).by(1)
+        expect { post :create, params: { user_id: @user, question_id: question, format: :js } }.to_not change(question.follows, :count)
+      end
+    end
   end
 
   describe 'DELETE #destroy' do
@@ -28,6 +35,7 @@ RSpec.describe FollowsController, type: :controller do
     end
 
     it 'user tries destroy not own follow' do
+      other_follow
       expect { delete :destroy, params: { question_id: question, id: other_follow, format: :js } }.to_not change(question.follows, :count)
     end
   end
