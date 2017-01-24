@@ -2,17 +2,17 @@ class FollowsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_question, only: [:create, :destroy]
 
-  authorize_resource
-
   respond_to :js
 
   def create
     respond_with @follow = @question.follows.create(user: current_user)
+    authorize! :create, @follow
   end
 
   def destroy
     @follow = Follow.find(params[:id])
-    respond_with @follow.destroy
+    @follow.destroy
+    authorize! :destroy, @follow
   end
 
   private
