@@ -4,5 +4,5 @@ ThinkingSphinx::Index.define :user, with: :active_record do
   indexes email, sortable: true
 
   # attributes
-  has id, created_at, updated_at
+  has created_at, updated_at
 end

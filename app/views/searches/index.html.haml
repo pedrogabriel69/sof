@@ -1,0 +1,9 @@
+.container
+  .row
+    = render 'questions/buttons'
+    .col-md-offset-1.col-md-10.col-md-offset-1
+      = simple_form_for(:search, url: search_result_path, remote: true) do |f|
+        = f.input :type, collection: types_of_search, label: "Choose type"
+        = f.input :value, label: false, placeholder: 'Add something...'
+        = f.submit "Search", class: "btn btn-primary btn-sm"
+      .result

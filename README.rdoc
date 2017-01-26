@@ -1,3 +1,1 @@
-# README
-
 This project is clone stackoverflow.
