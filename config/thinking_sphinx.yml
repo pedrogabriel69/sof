@@ -1,0 +1,5 @@
+development:
+  mysql41: 9306
+  morphology: stem_en
+test:
+  mysql41: 9307

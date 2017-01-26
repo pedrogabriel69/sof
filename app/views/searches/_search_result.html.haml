@@ -1,36 +1,41 @@
 %br
-- result.each do |r|
-  - if r.class.name == 'Question'
-    = "Type: #{r.class.name}"
+- if result.empty?
+  %h4
+    = "#{result.size} results"
     %br
-    = "Author: #{r.user.name}"
-    %br
-    = link_to "Title: #{r.title}", question_url(r)
-    %br
-    = "Body: #{r.body}"
-    %hr
-  - elsif r.class.name == 'Answer'
-    = "Type: #{r.class.name}"
-    %br
-    = "Author: #{r.user.name}"
-    %br
-    = link_to "Body: #{r.body}", question_url(r.question)
-    %hr
-  - elsif r.class.name == 'Comment'
-    - if r.commentable.class.name == 'Question'
-      - comment_url = r.commentable
-    - else
-      - comment_url = r.commentable.question
-    = "Type: #{r.class.name}"
-    %br
-    = "Author: #{r.user.name}"
-    %br
-    = link_to "Body: #{r.body}", question_url(comment_url)
-    %hr
-  - elsif r.class.name == 'User'
-    = "Type: #{r.class.name}"
-    %br
-    = "Name: #{r.name}"
-    %br
-    = "Email: #{r.email}"
-    %hr
+    = "Your search returned no matches."
+- else
+  %h4
+    = "#{result.size} results"
+  - result.each do |r|
+    - if r.class.name == 'Question'
+      = "Type: #{r.class.name}"
+      %br
+      = "Author: #{r.user.name}"
+      %br
+      = link_to "Title: #{r.title}", question_url(r)
+      %br
+      = "Body: #{r.body}"
+      %hr
+    - elsif r.class.name == 'Answer'
+      = "Type: #{r.class.name}"
+      %br
+      = "Author: #{r.user.name}"
+      %br
+      = link_to "Body: #{r.body}", question_url(r.question)
+      %hr
+    - elsif r.class.name == 'Comment'
+      - r.commentable.class.name == 'Question' ? comment_url = r.commentable : comment_url = r.commentable.question
+      = "Type: #{r.class.name}"
+      %br
+      = "Author: #{r.user.name}"
+      %br
+      = link_to "Body: #{r.body}", question_url(comment_url)
+      %hr
+    - elsif r.class.name == 'User'
+      = "Type: #{r.class.name}"
+      %br
+      = "Name: #{r.name}"
+      %br
+      = "Email: #{r.email}"
+      %hr
