@@ -1,1 +1,23 @@
-This project is clone stackoverflow.
+This project is stackoverflow clone.
+
+Main features:
+- User can Sign up, Sign in or Sign out
+- User can Sign in with Facebook or Twitter
+- User can create, show, edit, delete questions, answers and comments
+- User can attach files to questions and answers
+- Question's author can choose best answer
+- Users can vote for questions and answers
+- User can subscribe questions and receive mails after creating new answers
+- User can implement search questions, answers, comments and other users
+
+Technologies:
+- RSpec - unit and acceptance tests, Capybara, Webdriver: Webkit, Selenium
+- REST API, doorkeeper, active model serializers
+- Authentication with devise
+- OAuth with Facebook and Twitter
+- Authorization with cancan
+- AJAX and Responders
+- Nested forms and polymorphic association
+- Comet and Pub/Sub, ActionCable
+- ActiveJob, Sidekiq, Whenever and Redis
+- Integration and set up Sphinx
