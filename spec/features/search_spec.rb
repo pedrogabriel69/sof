@@ -2,7 +2,7 @@ require_relative 'features_helper'
 
 feature 'Search' do
   let!(:user) { create(:user, name: 'test_user', email: 'user@test.io') }
-  let!(:question) { create(:question, title: 'Title', body: 'Question', user: user) }
+  let!(:question) { create(:question, title: 'Title', body: 'm?@sk$-"ny', user: user) }
   let!(:answer) { create(:answer, user: user, question: question, body: 'Answer') }
   let!(:comment) { create(:comment, user: user, commentable_id: answer.id, commentable_type: 'Answer', body: 'Comment to A') }
 
@@ -15,11 +15,11 @@ feature 'Search' do
     scenario 'Type: Global', js: true do
       within ".search" do
         select "Global", from: "Choose type"
-        fill_in 'Add something...', with: question.body
+        fill_in 'Add something...', with: 'm?@sk$-"ny'
         click_on 'Search'
       end
 
-      expect(page).to have_content "Question"
+      expect(page).to have_content 'm?@sk$-"ny'
     end
 
     scenario 'Type: Question', js: true do

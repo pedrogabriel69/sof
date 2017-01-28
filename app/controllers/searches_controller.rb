@@ -5,20 +5,12 @@ class SearchesController < ApplicationController
 
   def search
     type = params[:search][:type]
-    unchecked = params[:search][:value]
-    value = unchecked.include?('@') ? check_spelling(unchecked) : unchecked
+    value = params[:search][:value]
 
     @result = if type == 'Global'
-                ThinkingSphinx.search value
+                ThinkingSphinx.search ThinkingSphinx::Query.escape(value)
               else
-                type.classify.constantize.search value
+                type.classify.constantize.search ThinkingSphinx::Query.escape(value)
               end
-  end
-
-  private
-
-  # here, cuz I don't have model search
-  def check_spelling(text)
-    text.gsub!('@', '\\' + '@')
   end
 end
