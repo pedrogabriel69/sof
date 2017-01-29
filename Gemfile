@@ -37,6 +37,8 @@ gem 'sidetiq'
 gem 'whenever', require: false
 gem 'mysql2'
 gem 'thinking-sphinx'
+gem 'dotenv'
+gem 'dotenv-deployment', require: 'dotenv/deployment'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -56,6 +58,10 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'letter_opener'
+  gem 'capistrano', require: false
+  gem 'capistrano-bundle', require: false
+  gem 'capistrano-rvm', require: false
+  gem 'capistrano-rails', require: false
 end
 
 group :test do
