@@ -1,0 +1,13 @@
+.container
+  .row
+    = render 'questions/buttons'
+    .col-md-offset-1.col-md-10.col-md-offset-1
+      %h4
+        = @user.name
+      = "Email: #{@user.email}"
+      %br
+      = "Questions: #{@user.questions.size}"
+      %br
+      = "Answers: #{@user.answers.size}"
+      %br
+      = "Comments: #{@user.comments.size}"

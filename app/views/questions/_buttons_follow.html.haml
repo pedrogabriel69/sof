@@ -5,8 +5,8 @@
         = follow_btn(question)
       - else
         = unsubscribe_btn(question)
-      = link_to "My profile", "#", class: "btn btn-primary btn-sm"
-      = link_to "Users", "#", class: "btn btn-primary btn-sm"
+      = link_to "My profile", user_path(current_user), class: "btn btn-primary btn-sm"
+      = link_to "Users", users_path, class: "btn btn-primary btn-sm"
       = link_to "Search", search_path, class: "btn btn-primary btn-sm"
       = link_to "Ask question", new_question_path, class: "btn btn-primary btn-sm", "data-target": "#new_modal", "data-toggle": "modal"
       #new_modal.modal.fade

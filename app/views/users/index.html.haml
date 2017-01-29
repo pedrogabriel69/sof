@@ -1,0 +1,11 @@
+.container
+  .row
+    = render 'questions/buttons'
+    .col-md-offset-1.col-md-10.col-md-offset-1
+      %h4
+        = "#{@users.size} Users"
+      - @users.each do |user|
+        = link_to "#{user.name}", user_path(user)
+        %br
+        = user.email
+        %hr
