@@ -21,5 +21,5 @@ Rails.application.configure do
 
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.default_url_options = { host: '104.236.113.199', port: 4321 }
+  config.action_mailer.default_url_options = { host: '104.236.113.199' }
 end
