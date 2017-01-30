@@ -1,6 +1,6 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  before_action :auth, only: [:facebook, :twitter, :sign_in_email]
-  before_action :load_logic, only: [:twitter, :sign_in_email]
+  before_action :auth, only: [:facebook, :sign_in_email]
+  before_action :load_logic, only: [:sign_in_email]
 
   def facebook
     # render json: request.env['omniauth.auth']
@@ -13,7 +13,9 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
-  def twitter; end
+  def twitter
+    render json: request.env['omniauth.auth']
+  end
 
   def sign_in_email; end
 
