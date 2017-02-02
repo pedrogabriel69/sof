@@ -40,6 +40,7 @@ gem 'thinking-sphinx'
 gem 'dotenv'
 gem 'dotenv-deployment', require: 'dotenv/deployment'
 gem 'therubyracer'
+gem 'unicorn'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -64,6 +65,7 @@ group :development do
   gem 'capistrano-rvm', require: false
   gem 'capistrano-rails', require: false
   gem 'capistrano-sidekiq', require: false
+  gem 'capistrano3-unicorn', require: false
 end
 
 group :test do

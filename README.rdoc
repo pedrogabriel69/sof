@@ -21,3 +21,4 @@ Technologies:
 - Comet and Pub/Sub, ActionCable
 - ActiveJob, Sidekiq, Whenever and Redis
 - Integration and set up Sphinx
+- Nginx, Unicorn, Capistrano, Monit
