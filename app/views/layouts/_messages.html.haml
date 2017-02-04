@@ -1,7 +1,16 @@
 .col-md-offset-1.col-md-10.col-md-offset-1
-  - flash.each do |key, value|
-    %div{:class => "alert alert-#{key}"}
+  - if flash[:recaptcha_error] && flash[:recaptcha_error] == 'reCAPTCHA verification failed, please try again.'
+    %div{:class => "alert alert-error"}
       %a.close{"data-dismiss" => "alert", :href => "#"} ×
       %ul
         %li
-          = value
+          = 'User could not be created.'
+        %li
+          = 'reCAPTCHA verification failed, please try again.'
+  - else
+    - flash.each do |key, value|
+      %div{:class => "alert alert-#{key}"}
+        %a.close{"data-dismiss" => "alert", :href => "#"} ×
+        %ul
+          %li
+            = value
