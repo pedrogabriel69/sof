@@ -8,7 +8,7 @@ class Question < ApplicationRecord
   validates :title, :body, presence: true
 
   scope :ordered_question, -> { order('created_at ASC') }
-  scope :last_questions, -> { where(created_at: DateTime.yesterday) }
+  scope :last_questions, -> { where(created_at: (Time.now - 24.hours)..Time.now) }
 
   def change_subscr
     update(check_follow: !check_follow)
