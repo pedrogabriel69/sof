@@ -1,4 +1,4 @@
-http://104.236.113.199/
+http://104.236.113.199
 
 This project is stackoverflow clone.
 
