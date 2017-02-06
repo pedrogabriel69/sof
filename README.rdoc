@@ -1,3 +1,4 @@
+http://104.236.113.199/
 This project is stackoverflow clone.
 
 Main features:
@@ -7,6 +8,7 @@ Main features:
 - User can attach files to questions and answers
 - Question's author can choose best answer
 - Users can vote for questions and answers
+- Users receive daily digest with questions that was created last 24 hours
 - User can subscribe questions and receive mails after creating new answers
 - User can implement search questions, answers, comments and other users
 

@@ -7,7 +7,7 @@ class Question < ApplicationRecord
 
   validates :title, :body, presence: true
 
-  scope :ordered_question, -> { order('created_at ASC') }
+  scope :ordered_question, -> { order(created_at: :desc) }
   scope :last_questions, -> { where(created_at: (Time.now - 24.hours)..Time.now) }
 
   def change_subscr
