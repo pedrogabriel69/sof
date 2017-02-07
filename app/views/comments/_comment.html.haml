@@ -1,4 +1,4 @@
-- cache comment do
+- cache_unless user_signed_in?, comment do
   %div{id: "comment_#{comment.id}"}
     %h6
       = "#{comment.body} - #{comment.user.name}, #{time_ago_in_words comment.created_at} ago"

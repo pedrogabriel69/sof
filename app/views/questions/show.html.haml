@@ -1,4 +1,4 @@
-- cache @question do
+- cache_unless user_signed_in?, @question do
   .container
     .row
       = render 'buttons_follow', question: @question
@@ -15,7 +15,7 @@
           .col-md-offset-1
             %h5 Attachments:
             - @question.attachments.each do |a|
-              - cache a do
+              - cache_unless user_signed_in?, a do
                 %div{id: "attachment_#{a.id}"}
                   = link_to a.file.identifier, a.file.url
                   - if can? :destroy, a
