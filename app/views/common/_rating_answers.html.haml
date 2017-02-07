@@ -1,5 +1,6 @@
-- if user_signed_in?
-  = link_to '', like_question_answer_path(@question, resource), remote: true, class: "glyphicon glyphicon-triangle-top vote-answer", data: { type: :json }
-  %div{id: "rating_#{resource.id}"}
-    = resource.rating
-  = link_to '', unlike_question_answer_path(@question, resource), remote: true, class: "glyphicon glyphicon-triangle-bottom vote-answer", data: { type: :json }
+- cache resource do
+  - if user_signed_in?
+    = link_to '', like_question_answer_path(@question, resource), remote: true, class: "glyphicon glyphicon-triangle-top vote-answer", data: { type: :json }
+    %div{id: "rating_#{resource.id}"}
+      = resource.rating
+    = link_to '', unlike_question_answer_path(@question, resource), remote: true, class: "glyphicon glyphicon-triangle-bottom vote-answer", data: { type: :json }

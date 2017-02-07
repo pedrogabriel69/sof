@@ -42,6 +42,7 @@ gem 'dotenv-deployment', require: 'dotenv/deployment'
 gem 'therubyracer'
 gem 'unicorn'
 gem "recaptcha", require: "recaptcha/rails"
+gem 'redis-rails'
 
 group :development, :test do
   gem 'byebug', platform: :mri

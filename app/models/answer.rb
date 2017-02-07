@@ -4,7 +4,7 @@ class Answer < ApplicationRecord
 
   after_commit :send_email, on: :create
 
-  belongs_to :question
+  belongs_to :question, touch: true
 
   validates :body, presence: true
 

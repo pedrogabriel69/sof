@@ -1,50 +1,52 @@
-.container
-  .row
-    = render 'buttons_follow', question: @question
-    .question
-      %div
-        .col-md-offset-1.col-md-11
-          %h4
-            = @question.user.name
-            %p= @question.title
-        .col-md-1
-          = render 'common/rating_question', resource: @question
-        .col-md-11
-          = @question.body
-        .col-md-offset-1
-          %h5 Attachments:
-          - @question.attachments.each do |a|
-            %div{id: "attachment_#{a.id}"}
-              = link_to a.file.identifier, a.file.url
-              - if can? :destroy, a
-                = link_to '', a, class: "glyphicon glyphicon-remove", method: :delete, remote: true
-
-          = render 'links_comment', question: @question
-          %hr
-          = render 'comments/question_comment_form'
-
-          - if @question.comments.present?
-            %h6
-              = "#{@question.comments.count} Comments"
-          .comments
-            - @question.comments.ordered_comment.each do |comment|
-              = render 'comments/comment', comment: comment
-
-        - if @question.answers.present?
-          .col-md-offset-1
+- cache @question do
+  .container
+    .row
+      = render 'buttons_follow', question: @question
+      .question
+        %div
+          .col-md-offset-1.col-md-11
             %h4
-              = "#{@question.answers.count} Answers"
-        .answers
-          = render 'questions/answers'
+              = @question.user.name
+              %p= @question.title
+          .col-md-1
+            = render 'common/rating_question', resource: @question
+          .col-md-11
+            = @question.body
+          .col-md-offset-1
+            %h5 Attachments:
+            - @question.attachments.each do |a|
+              - cache a do
+                %div{id: "attachment_#{a.id}"}
+                  = link_to a.file.identifier, a.file.url
+                  - if can? :destroy, a
+                    = link_to '', a, class: "glyphicon glyphicon-remove", method: :delete, remote: true
 
-        .col-md-offset-1
-          - if can? :create, Answer
-            .new_answer_form
-              = simple_form_for([@question, @answer], remote: true) do |f|
-                .answer_errors
-                = f.input :body, label: false, placeholder: 'Your answer'
-                = f.simple_fields_for :attachments do |a|
-                  = render 'attachment_fields', f: a
-                .links
-                  = link_to_add_association 'Attach file', f, :attachments
-                = f.submit "Save", class: "btn btn-primary btn-sm"
+            = render 'links_comment', question: @question
+            %hr
+            = render 'comments/question_comment_form'
+
+            - if @question.comments.present?
+              %h6
+                = "#{@question.comments.count} Comments"
+            .comments
+              - @question.comments.ordered_comment.each do |comment|
+                = render 'comments/comment', comment: comment
+
+          - if @question.answers.present?
+            .col-md-offset-1
+              %h4
+                = "#{@question.answers.count} Answers"
+          .answers
+            = render 'questions/answers'
+
+          .col-md-offset-1
+            - if can? :create, Answer
+              .new_answer_form
+                = simple_form_for([@question, @answer], remote: true) do |f|
+                  .answer_errors
+                  = f.input :body, label: false, placeholder: 'Your answer'
+                  = f.simple_fields_for :attachments do |a|
+                    = render 'attachment_fields', f: a
+                  .links
+                    = link_to_add_association 'Attach file', f, :attachments
+                  = f.submit "Save", class: "btn btn-primary btn-sm"

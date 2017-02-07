@@ -1,6 +1,7 @@
-.questions
-  - if user_signed_in?
-    = link_to '', like_question_path(resource), remote: true, class: "glyphicon glyphicon-triangle-top votes question-like", data: { type: :json }
-    .rating
-      = resource.rating
-    = link_to '', unlike_question_path(resource), remote: true, class: "glyphicon glyphicon-triangle-bottom votes question-unlike", data: { type: :json }
+- cache resource do
+  .questions
+    - if user_signed_in?
+      = link_to '', like_question_path(resource), remote: true, class: "glyphicon glyphicon-triangle-top votes question-like", data: { type: :json }
+      .rating
+        = resource.rating
+      = link_to '', unlike_question_path(resource), remote: true, class: "glyphicon glyphicon-triangle-bottom votes question-unlike", data: { type: :json }

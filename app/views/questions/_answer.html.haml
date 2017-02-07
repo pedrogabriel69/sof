@@ -1,41 +1,43 @@
-%div{id: "answer_#{answer.id}"}
-  .col-md-offset-1
-    %strong
-      = answer.user.name
-      = "added #{time_ago_in_words answer.created_at} ago"
-    %br
-  .col-md-1
-    = render 'common/rating_answers', resource: answer
-  .col-md-11
-    = answer.body
-  .col-md-offset-1
-    %h5 Attachments:
-    - answer.attachments.each do |a|
-      %div{id: "attachment_#{a.id}"}
-        = link_to a.file.identifier, a.file.url
-        - if can? :destroy, a
-          = link_to '', a, class: "glyphicon glyphicon-remove", method: :delete, remote: true
-  .col-md-offset-11.col-md-3
-    - if can? :create, Comment
-      = link_to '', '', class: "glyphicon glyphicon-comment answer-comment-link", data: { answer_id: answer.id }
-    - if user_signed_in?
-      = best_btn(@question, answer)
-    - if can? :update, answer
-      = link_to '', '', class: "glyphicon glyphicon-pencil edit-answer-link", data: { answer_id: answer.id }
-      = link_to '', [@question, answer], method: :delete, remote: true, class: "glyphicon glyphicon-remove"
-  .col-md-offset-1
-    %hr
-  .col-md-offset-1
-    = render 'comments/answer_comment_form', answer: answer
+- cache answer do
+  %div{id: "answer_#{answer.id}"}
+    .col-md-offset-1
+      %strong
+        = answer.user.name
+        = "added #{time_ago_in_words answer.created_at} ago"
+      %br
+    .col-md-1
+      = render 'common/rating_answers', resource: answer
+    .col-md-11
+      = answer.body
+    .col-md-offset-1
+      %h5 Attachments:
+      - answer.attachments.each do |a|
+        - cache a do
+          %div{id: "attachment_#{a.id}"}
+            = link_to a.file.identifier, a.file.url
+            - if can? :destroy, a
+              = link_to '', a, class: "glyphicon glyphicon-remove", method: :delete, remote: true
+    .col-md-offset-11.col-md-3
+      - if can? :create, Comment
+        = link_to '', '', class: "glyphicon glyphicon-comment answer-comment-link", data: { answer_id: answer.id }
+      - if user_signed_in?
+        = best_btn(@question, answer)
+      - if can? :update, answer
+        = link_to '', '', class: "glyphicon glyphicon-pencil edit-answer-link", data: { answer_id: answer.id }
+        = link_to '', [@question, answer], method: :delete, remote: true, class: "glyphicon glyphicon-remove"
+    .col-md-offset-1
+      %hr
+    .col-md-offset-1
+      = render 'comments/answer_comment_form', answer: answer
 
-    - if answer.comments.present?
-      %h6
-        = "#{answer.comments.count} Comments"
-    %div{id: "comment_answer_#{answer.id}"}
-      - answer.comments.ordered_comment.each do |comment|
-        = render 'comments/comment', comment: comment
+      - if answer.comments.present?
+        %h6
+          = "#{answer.comments.count} Comments"
+      %div{id: "comment_answer_#{answer.id}"}
+        - answer.comments.ordered_comment.each do |comment|
+          = render 'comments/comment', comment: comment
 
-    = simple_form_for([@question, answer], remote: true, html: { id: "edit-answer-#{answer.id}" }) do |f|
-      .answer_errors
-      = f.input :body, label: false, placeholder: 'Your answer'
-      = f.submit "Edit", class: "btn btn-primary btn-sm"
+      = simple_form_for([@question, answer], remote: true, html: { id: "edit-answer-#{answer.id}" }) do |f|
+        .answer_errors
+        = f.input :body, label: false, placeholder: 'Your answer'
+        = f.submit "Edit", class: "btn btn-primary btn-sm"

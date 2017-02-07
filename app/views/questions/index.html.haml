@@ -3,9 +3,10 @@
     = render 'buttons'
     .col-md-offset-1.col-md-10.col-md-offset-1
       .list-questions
-        - @questions.ordered_question.each do |question|
-          %h4= link_to "#{question.title}", question
-        
-          = question.body
-          %br/
-          = render 'links', question: question
+        - cache collection_cache_key_for :question do
+          - @questions.ordered_question.each do |question|
+            %h4= link_to "#{question.title}", question
+
+            = question.body
+            %br/
+            = render 'links', question: question
