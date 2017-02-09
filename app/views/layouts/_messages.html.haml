@@ -1,10 +1,8 @@
 .col-md-offset-1.col-md-10.col-md-offset-1
-  - if flash[:recaptcha_error] && flash[:recaptcha_error] == 'reCAPTCHA verification failed, please try again.'
+  - if flash[:recaptcha_error].present?
     %div{:class => "alert alert-error"}
       %a.close{"data-dismiss" => "alert", :href => "#"} ×
       %ul
-        %li
-          = 'User could not be created.'
         %li
           = 'reCAPTCHA verification failed, please try again.'
   - else

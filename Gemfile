@@ -43,6 +43,7 @@ gem 'therubyracer'
 gem 'unicorn'
 gem "recaptcha", require: "recaptcha/rails"
 gem 'redis-rails'
+gem 'dalli'
 
 group :development, :test do
   gem 'byebug', platform: :mri
