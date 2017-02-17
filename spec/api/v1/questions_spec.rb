@@ -6,8 +6,8 @@ describe 'Question API' do
 
     context 'authorized' do
       let(:access_token) { create(:access_token) }
-      let!(:questions) { create_list(:question, 2) }
-      let(:question) { questions.first }
+      let!(:old_question) { create(:question, created_at: 2.days.ago) }
+      let!(:question) { create(:question) }
       let!(:answer) { create(:answer, question: question) }
       let(:add_path) { '0/answers/0/' }
       let(:add_path_question) { '0/' }
