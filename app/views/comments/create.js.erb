@@ -8,10 +8,10 @@
     $("form#new-question-comment input[type=text]").val('');
   <% end %>
   <% if @comment.commentable_type == 'Answer' %>
-    // if(!$("#comment_#{@answer.id}")[0]){
-    //   $("#comment_<%= @answer.id %>").append("<%= j render 'comments/comment', comment: @comment %>");
+    // if(!$("#comment_#{@comment.id}")[0]){
+    //   $("#comment_answer_<%= @answer.id %>").append("<%= j render 'comments/comment', comment: @comment %>");
     // }
-    $("#comment_<%= @answer.id %>").append("<%= j render 'comments/comment', comment: @comment %>");
+    $("#comment_answer_<%= @answer.id %>").append("<%= j render 'comments/comment', comment: @comment %>");
     $("form#new-comment-<%= @answer.id %>").hide();
     $("form#new-comment-<%= @answer.id %> input[type=text]").val('');
   <% end %>
