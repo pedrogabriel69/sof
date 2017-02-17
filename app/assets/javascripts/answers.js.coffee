@@ -24,7 +24,4 @@ ready = ->
       $('.answers').append(JST["answer"]({answer: answer, question: question}));
   })
 
-$(document).ready(ready)
-$(document).on('page:load', ready)
-$(document).on('page:update', ready)
-# $(document).on("turbolinks:load", ready)
+$(document).on('turbolinks:load', ready)

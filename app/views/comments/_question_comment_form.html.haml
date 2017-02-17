@@ -1,4 +1,4 @@
-= simple_form_for([@question, @comment], remote: true) do |f|
+= simple_form_for([@question, @comment], remote: true, html: { id: "new-question-comment" }) do |f|
   .comment_errors
   = f.input :body, label: false, placeholder: 'Your comment'
   = f.submit "Save", class: "btn btn-primary btn-sm"

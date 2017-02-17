@@ -19,7 +19,7 @@ feature 'User vote for answer', '
       expect(page).to have_content "0"
     end
 
-    find("a[href='#{like_question_answer_path(question, answer)}']").click
+    find("a[href='#{like_question_answer_path(question, answer)}']").trigger('click')
 
     expect(current_path).to eq question_path(question)
     within "#rating_#{answer.id}" do
@@ -36,7 +36,7 @@ feature 'User vote for answer', '
       expect(page).to have_content "0"
     end
 
-    find("a[href='#{like_question_answer_path(question, answer)}']").click
+    find("a[href='#{like_question_answer_path(question, answer)}']").trigger('click')
 
     expect(current_path).to eq question_path(question)
     within "#rating_#{answer.id}" do
@@ -53,14 +53,14 @@ feature 'User vote for answer', '
       expect(page).to have_content "0"
     end
 
-    find("a[href='#{like_question_answer_path(question, answer)}']").click
+    find("a[href='#{like_question_answer_path(question, answer)}']").trigger('click')
 
     expect(current_path).to eq question_path(question)
     within "#rating_#{answer.id}" do
       expect(page).to have_content "1"
     end
 
-    find("a[href='#{like_question_path(question)}']").click
+    find("a[href='#{like_question_path(question)}']").trigger('click')
 
     expect(current_path).to eq question_path(question)
     within "#rating_#{answer.id}" do

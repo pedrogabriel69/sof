@@ -14,7 +14,7 @@ feature 'User create comment to answer', '
 
     visit question_path(question)
 
-    page.find(".answer-comment-link").click
+    page.find(".answer-comment-link").trigger('click')
     fill_in('Your comment', with: 'My Comment')
     within '.simple_form.new_comment' do
       click_button 'Save'
@@ -31,7 +31,7 @@ feature 'User create comment to answer', '
 
     visit question_path(question)
 
-    page.find(".answer-comment-link").click
+    page.find(".answer-comment-link").trigger('click')
     within '.simple_form.new_comment' do
       click_button 'Save'
     end
@@ -52,7 +52,7 @@ feature 'User create comment to answer', '
       end
 
       Capybara.using_session('user') do
-        page.find(".answer-comment-link").click
+        page.find(".answer-comment-link").trigger('click')
         fill_in('Your comment', with: 'My Comment')
         within '.simple_form.new_comment' do
           click_button 'Save'

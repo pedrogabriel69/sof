@@ -1,2 +1,2 @@
-- @question.answers.ordered.each do |answer|
+- @question.answers.includes(:user, :attachments, comments: :user).ordered.each do |answer|
   = render 'questions/answer', answer: answer

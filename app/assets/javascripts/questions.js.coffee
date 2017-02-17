@@ -15,7 +15,4 @@ ready = ->
       $('.list-questions').append(JST["question"]({question: question}));
   })
 
-$(document).ready(ready)
-$(document).on('page:load', ready)
-$(document).on('page:update', ready)
-# $(document).on("turbolinks:load", ready)
+$(document).on('turbolinks:load', ready)

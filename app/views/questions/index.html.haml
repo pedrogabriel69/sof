@@ -3,7 +3,7 @@
     = render 'buttons'
     .col-md-offset-1.col-md-10.col-md-offset-1
       .list-questions
-        - cache collection_cache_key_for :question do
+        - cache_unless user_signed_in?, @questions do
           - @questions.ordered_question.each do |question|
             %h4= link_to "#{question.title}", question
 

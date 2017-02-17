@@ -1,8 +1,9 @@
 ready = ->
+  console.log('comments ready')
   $('.question').on 'click', '.question-comment-link', (e) ->
     e.preventDefault();
     $(this).hide();
-    $("form#new_comment").show();
+    $("form#new-question-comment").show();
 
   $('.answers').on 'click', '.answer-comment-link', (e) ->
     e.preventDefault();
@@ -26,6 +27,4 @@ ready = ->
         $('#comment_answer_' + comment.commentable_id).append(JST["comment"]({comment: comment}));
   })
 
-$(document).ready(ready)
-$(document).on('page:load', ready)
-$(document).on('page:update', ready)
+$(document).on('turbolinks:load', ready)

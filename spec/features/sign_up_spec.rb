@@ -4,6 +4,10 @@ feature 'User sign up', '
   For checking sing up
 ' do
 
+  before do
+    allow(RegistrationsController.new).to receive(:verify_recaptcha).and_return(true)
+  end
+
   scenario 'User try to sign up, success' do
     visit new_user_registration_path
     fill_in('Username', with: 'user')

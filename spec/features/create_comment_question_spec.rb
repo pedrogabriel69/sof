@@ -13,7 +13,7 @@ feature 'User create comment to question', '
 
     visit question_path(question)
 
-    page.find(".question-comment-link").click
+    page.find(".question-comment-link").trigger('click')
     fill_in('Your comment', with: 'My Comment')
     within '.simple_form.new_comment' do
       click_button 'Save'
@@ -30,7 +30,7 @@ feature 'User create comment to question', '
 
     visit question_path(question)
 
-    page.find(".question-comment-link").click
+    page.find(".question-comment-link").trigger('click')
     within '.simple_form.new_comment' do
       click_button 'Save'
     end
@@ -51,7 +51,7 @@ feature 'User create comment to question', '
       end
 
       Capybara.using_session('user') do
-        page.find(".question-comment-link").click
+        page.find(".question-comment-link").trigger('click')
         fill_in('Your comment', with: 'My Comment')
         within '.simple_form.new_comment' do
           click_button 'Save'
