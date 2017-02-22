@@ -1,6 +1,8 @@
 <% if @answer.errors.present? %>
   $('.answer_errors').html("<%= j render 'common/errors', resource: @answer %>");
 <% else %>
-  $('.answers').append("<%= j render 'questions/answer', answer: @answer %>");
+  if(!$("#answer_#{@answer.id}")[0]){
+    $('.answers').append("<%= j render 'questions/answer', answer: @answer %>");
+  }
   $('.new_answer_form textarea').val('');
 <% end %>
