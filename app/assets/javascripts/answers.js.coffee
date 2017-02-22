@@ -22,6 +22,7 @@ ready = ->
       console.log('Answer Id:', answer.id)
       return if $("#answer_#{answer.id}")[0]?
       $('.answers').append(JST["answer"]({answer: answer, question: question}));
+      $('.new_answer_form textarea').val('');
   })
 
 $(document).on('turbolinks:load', ready)

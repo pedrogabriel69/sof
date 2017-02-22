@@ -22,9 +22,13 @@ ready = ->
       if comment.commentable_type is 'Question'
         return if $("#comment_#{comment.id}")[0]?
         $('.comments').append(JST["comment"]({comment: comment}));
+        $("form#new-question-comment").hide();
+        $("form#new-question-comment input[type=text]").val('');
       else
         return if $("#comment_#{comment.id}")[0]?
         $('#comment_answer_' + comment.commentable_id).append(JST["comment"]({comment: comment}));
+        $("form#new-comment-" + comment.commentable_id).hide();
+        $("form#new-comment-#{comment.commentable_id} input[type=text]").val('');
   })
 
 $(document).on('turbolinks:load', ready)
