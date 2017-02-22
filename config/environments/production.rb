@@ -14,8 +14,9 @@ Rails.application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   config.web_socket_server_url = "ws://104.236.113.199/cable"
-  # config.action_cable.allowed_request_origins = ["http://104.236.113.199"]
-  
+  config.action_cable.url = "ws://104.236.113.199:28080"
+  Rails.application.config.action_cable.allowed_request_origins = ['http://104.236.113.199']
+
   if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
