@@ -2,18 +2,16 @@
   <% if @comment.commentable_type == 'Question' %>
     if(!$("#comment_#{@comment.id}")[0]){
       $('.comments').append("<%= j render 'comments/comment', comment: @comment %>");
+      $("form#new-question-comment").hide();
+      $("form#new-question-comment input[type=text]").val('');
     }
-    // $('.comments').append("<%= j render 'comments/comment', comment: @comment %>");
-    $("form#new-question-comment").hide();
-    $("form#new-question-comment input[type=text]").val('');
   <% end %>
   <% if @comment.commentable_type == 'Answer' %>
     if(!$("#comment_#{@comment.id}")[0]){
       $("#comment_answer_<%= @answer.id %>").append("<%= j render 'comments/comment', comment: @comment %>");
+      $("form#new-comment-<%= @answer.id %>").hide();
+      $("form#new-comment-<%= @answer.id %> input[type=text]").val('');
     }
-    // $("#comment_answer_<%= @answer.id %>").append("<%= j render 'comments/comment', comment: @comment %>");
-    $("form#new-comment-<%= @answer.id %>").hide();
-    $("form#new-comment-<%= @answer.id %> input[type=text]").val('');
   <% end %>
 <% else %>
     $('.comment_errors').html("<%= j render 'common/errors', resource: @comment %>");
