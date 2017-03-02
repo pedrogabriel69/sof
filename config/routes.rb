@@ -50,7 +50,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: [:index, :show]
+  resources :users, only: [:index, :show] do
+    member do
+      put :change_daily_digest
+    end
+  end
 
   mount ActionCable.server => '/cable'
 

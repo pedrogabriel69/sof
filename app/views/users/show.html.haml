@@ -11,3 +11,6 @@
       = "Answers: #{@user.answers.size}"
       %br
       = "Comments: #{@user.comments.size}"
+      %hr
+      .digest_btn
+        = digest_btn(@user)

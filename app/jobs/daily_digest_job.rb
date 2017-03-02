@@ -3,7 +3,7 @@ class DailyDigestJob < ApplicationJob
 
   def perform
     question = Question.last_questions.to_a
-    User.find_each.each do |user|
+    User.where(digest: true).find_each.each do |user|
       DailyMailer.digest(user, question).deliver_later
     end
   end

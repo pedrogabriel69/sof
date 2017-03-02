@@ -2,3 +2,5 @@
 %ul
  - @questions.each do |question|
   %li= link_to question.title, question_url(question)
+
+If you don't want to receive this mail every day, Turn off DailyDigest #{link_to "here.", user_url(@user)}
