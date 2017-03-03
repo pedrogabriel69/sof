@@ -16,12 +16,12 @@ Main features:
 Technologies:
 - RSpec - unit and acceptance tests, Capybara, Webdriver: Webkit, Selenium
 - REST API, doorkeeper, active model serializers
-- Authentication with devise
+- Authentication with devise, reCAPTCHA
 - OAuth with Facebook and Twitter
 - Authorization with cancan
 - AJAX and Responders
 - Nested forms and polymorphic association
 - Comet and Pub/Sub, ActionCable
 - ActiveJob, Sidekiq, Whenever and Redis
-- Integration and set up Sphinx
+- Integration and set up ThinkingSphinx
 - Nginx, Unicorn, Capistrano, Monit
